@@ -6,6 +6,16 @@ import { ADMIN_STYLES } from './admin_styles';
 
 export const ADMIN_DEFAULT_PIN = '2026';
 
+export function escapeHtml(str: string): string {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export class AdminPanel {
   private engine: RaceEngine;
   private container: HTMLElement;
@@ -144,6 +154,7 @@ export class AdminPanel {
   // ==========================================
   private renderCockpit(): void {
     this.container.innerHTML = this.renderHtml();
+    this.populateTabTables(document.getElementById('admin-tab-content'));
     this.bindEvents();
 
     this.unsubscribeTuning = onTuningChange(() => {
@@ -273,13 +284,13 @@ export class AdminPanel {
             <!-- CONEXÃO DA LIVE DO TIKTOK -->
             <div class="arcade-panel" style="padding: 12px;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span class="font-pixel" style="font-size: 11px; color: var(--admin-primary);">CONEXÃO DA LIVE</span>
+                <span class="font-pixel" style="font-size: 11px; color: var(--admin-primary);">CONEXÃO DA LIVE (SIMULADO)</span>
                 <span id="admin-live-badge" class="font-pixel" style="font-size: 11px; padding: 3px 8px; background: #064e3b; color: #34d399; border: 1px solid #059669;">
-                  ${liveStatus.state.toUpperCase()}
+                  ${liveStatus.state.toUpperCase()} (SIMULADO)
                 </span>
               </div>
               <div style="font-size: 12px; color: var(--admin-outline); line-height: 1.6;" class="font-mono">
-                <div>Canal: <strong style="color: #fff;">${liveStatus.channelName}</strong></div>
+                <div>Canal: <strong style="color: #fff;">${liveStatus.channelName}</strong> <span style="color: #ffd165; font-size: 10px;">[SIMULADO]</span></div>
                 <div>Tempo Conectado: <span id="admin-live-duration" style="color: #fff;">0m 00s</span></div>
                 <div>Reconexões: <span id="admin-live-reconnects" style="color: #ffd165;">${liveStatus.reconnectCount}</span></div>
                 <div id="admin-live-error-row" style="color: #f87171; font-size: 11px; display: ${liveStatus.lastError ? 'block' : 'none'};">
@@ -299,9 +310,9 @@ export class AdminPanel {
             <!-- CONTROLES DE AUDIÊNCIA (CHAT 13 / 22) -->
             <div class="arcade-panel" style="padding: 12px;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #000; padding-bottom: 6px;">
-                <span class="font-pixel" style="font-size: 11px; color: var(--admin-primary);">CONTROLES & AUDIÊNCIA</span>
+                <span class="font-pixel" style="font-size: 11px; color: var(--admin-primary);">CONTROLES & AUDIÊNCIA (SIMULADO)</span>
                 <span class="font-mono" style="font-size: 11px; color: var(--admin-outline); background: #000; padding: 2px 6px; border: 1px solid #262a35;">
-                  CHAT COLETIVO
+                  CHAT COLETIVO (SIMULADO)
                 </span>
               </div>
               <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -333,7 +344,7 @@ export class AdminPanel {
             <div class="arcade-panel" style="padding: 12px; flex: 1; display: flex; flex-direction: column; min-height: 0;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid #000; padding-bottom: 6px;">
                 <span class="font-pixel" style="font-size: 11px; color: var(--admin-primary);">PODERES & PRESENTES</span>
-                <span style="font-size: 11px; color: var(--admin-outline);" class="font-mono">TIKTOK LIVE</span>
+                <span style="font-size: 11px; color: var(--admin-outline);" class="font-mono">TIKTOK LIVE (SIMULADO)</span>
               </div>
               <div id="admin-gifts-quick-list" style="display: flex; flex-direction: column; gap: 6px; overflow-y: auto; flex: 1;">
                 ${this.renderQuickGiftsHtml()}
@@ -370,7 +381,7 @@ export class AdminPanel {
                 <!-- QUADRO 9:16 GRANDE QUASE TELA CHEIA VERTICAL -->
                 <div class="arena-preview-container">
                   <div style="font-size: 11px; color: var(--admin-primary); margin-bottom: 4px;" class="font-pixel">
-                    ★ TRANSMISSÃO 9:16 ★
+                    ★ TRANSMISSÃO 9:16 (SIMULADA) ★
                   </div>
                   <div class="preview-aspect-box">
                     <!-- TOPO ESTÁDIO COM REFLETORES -->
@@ -426,7 +437,7 @@ export class AdminPanel {
 
                     <!-- RODAPÉ DA TRANSMISSÃO -->
                     <div style="padding: 6px; background: rgba(0,0,0,0.85); text-align: center; border-top: 1px solid #333; font-size: 11px; color: #cbd5e1;" class="font-pixel">
-                      TIKTOK INTERATIVO 2026
+                      TIKTOK INTERATIVO 2026 (SIMULADO)
                     </div>
                   </div>
                 </div>
@@ -509,8 +520,8 @@ export class AdminPanel {
               <div class="admin-tabbed-monitor">
                 <div style="display: flex; gap: 4px; border-bottom: 2px solid #000; padding: 4px 8px; background: #0a0e18; overflow-x: auto; flex-shrink: 0;">
                   <button class="tab-btn ${this.activeTab === 'telemetry' ? 'active' : ''}" data-tab="telemetry">Monitor de Telemetria</button>
-                  <button class="tab-btn ${this.activeTab === 'ranking' ? 'active' : ''}" data-tab="ranking">Top Doações</button>
-                  <button class="tab-btn ${this.activeTab === 'chat' ? 'active' : ''}" data-tab="chat">Mensagens & Top Chat</button>
+                  <button class="tab-btn ${this.activeTab === 'ranking' ? 'active' : ''}" data-tab="ranking">Top Doações (Simulado)</button>
+                  <button class="tab-btn ${this.activeTab === 'chat' ? 'active' : ''}" data-tab="chat">Mensagens & Top Chat (Simulado)</button>
                   <button class="tab-btn ${this.activeTab === 'candidates' ? 'active' : ''}" data-tab="candidates">Gerenciar Personagens</button>
                   <button class="tab-btn ${this.activeTab === 'gifts' ? 'active' : ''}" data-tab="gifts">Tabela de Presentes</button>
                 </div>
@@ -637,11 +648,11 @@ export class AdminPanel {
         else if (g.power === 'shield') desc = `ESCUDO → ${g.candidateBenefited.toUpperCase()}`;
 
         return `
-        <button class="arcade-gift-card ${borderClass} quick-gift-btn" data-gift="${g.giftId}" style="width: 100%;" aria-label="Enviar presente ${g.name}">
+        <button class="arcade-gift-card ${borderClass} quick-gift-btn" data-gift="${g.giftId}" style="width: 100%;" aria-label="Enviar presente ${escapeHtml(g.name)}">
           <div style="font-size: 20px; line-height: 1;">${iconMap[g.giftId] || '🎁'}</div>
           <div style="flex: 1; min-width: 0;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span class="font-pixel" style="font-size: 11px; color: #fff;">${g.name.toUpperCase()}</span>
+              <span class="font-pixel" style="font-size: 11px; color: #fff;">${escapeHtml(g.name.toUpperCase())}</span>
               <span class="${badgeClass}">${badgeText}</span>
             </div>
             <div style="font-size: 11px; color: var(--admin-outline); margin-top: 2px;" class="font-mono">
@@ -665,19 +676,6 @@ export class AdminPanel {
       const allLogs = this.engine.getLogs();
       const appliedCount = allLogs.filter((l) => l.kind === 'event_decision' && l.applied).length;
       const ignoredCount = allLogs.filter((l) => l.kind === 'event_decision' && !l.applied).length;
-
-      const filteredLogs = allLogs
-        .filter((log) => {
-          if (this.logFilter === 'all') return true;
-          if (this.logFilter === 'applied') return log.kind === 'event_decision' && log.applied;
-          if (this.logFilter === 'ignored') return log.kind === 'event_decision' && !log.applied;
-          if (this.logFilter === 'chat') return log.kind === 'event_decision' && log.event.type === 'chat';
-          if (this.logFilter === 'gifts') return log.kind === 'event_decision' && log.event.type === 'gift';
-          if (this.logFilter === 'system') return log.kind === 'lifecycle';
-          return true;
-        })
-        .slice(-50)
-        .reverse();
 
       return `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 6px;">
@@ -717,64 +715,16 @@ export class AdminPanel {
               <th style="text-align: right;">STATUS</th>
             </tr>
           </thead>
-          <tbody>
-            ${
-              filteredLogs.length === 0
-                ? '<tr><td colspan="5" style="text-align: center; color: #666; padding: 16px;">Nenhum evento registrado</td></tr>'
-                : filteredLogs
-                    .map((log) => {
-                      const isDecision = log.kind === 'event_decision';
-                      const statusColor = isDecision ? (log.applied ? '#34d399' : '#f87171') : '#60a5fa';
-                      const statusText = isDecision ? (log.applied ? 'APLICADO' : 'IGNORADO') : 'SISTEMA';
-
-                      let badgeHtml = '';
-                      let originText = 'SISTEMA';
-                      let payloadText = '';
-
-                      if (isDecision) {
-                        originText = log.event.userId.startsWith('donor_')
-                          ? '@doador'
-                          : log.event.userId.startsWith('spam_')
-                            ? '@espectador'
-                            : '@operador';
-                        if (log.event.type === 'gift') {
-                          badgeHtml = `<span class="log-badge-gift">GIFT</span>`;
-                          payloadText = `🎁 Presente ${log.event.giftId} (${log.event.power}) → ${log.event.candidateBenefited.toUpperCase()}`;
-                        } else {
-                          badgeHtml = `<span class="log-badge-chat">CHAT</span>`;
-                          payloadText = `Chat para ${log.event.candidateId.toUpperCase()} (${log.reason})`;
-                        }
-                      } else {
-                        badgeHtml = `<span class="log-badge-system">SISTEMA</span>`;
-                        payloadText = log.description;
-                      }
-
-                      return `
-                  <tr>
-                    <td style="color: #94a3b8; font-size: 11px;">${new Date(log.timeIso).toLocaleTimeString()}</td>
-                    <td>${badgeHtml}</td>
-                    <td style="color: #cbd5e1; font-size: 12px; font-weight: 500;">${originText}</td>
-                    <td style="color: #ffffff; font-size: 12px; word-break: break-word;">${payloadText}</td>
-                    <td style="text-align: right; color: ${statusColor}; font-weight: bold; font-size: 12px;" class="font-pixel">${statusText}</td>
-                  </tr>
-                `;
-                    })
-                    .join('')
-            }
-          </tbody>
+          <tbody id="admin-telemetry-tbody"></tbody>
         </table>
       `;
     }
 
     if (this.activeTab === 'ranking') {
-      const windowMs = this.donorWindow === '15m' ? 15 * 60 * 1000 : undefined;
-      const top = liveServiceMock.getTopDonors(10, windowMs);
-      const maxDiamonds = top.length > 0 ? top[0].totalDiamonds : 1;
-
       return `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <div style="font-size: 11px; color: var(--admin-outline);">
-            Maiores doadores da live classificados por volume de diamantes
+            Maiores doadores da live [SIMULADO] classificados por volume de diamantes
           </div>
           <div style="display: flex; gap: 4px;">
             <button class="log-filter-btn ${this.donorWindow === 'session' ? 'active' : ''}" data-window="session">SESSÃO COMPLETA</button>
@@ -792,44 +742,18 @@ export class AdminPanel {
               <th>REPRESENTATIVIDADE</th>
             </tr>
           </thead>
-          <tbody>
-            ${
-              top.length === 0
-                ? '<tr><td colspan="5" style="text-align: center; color: #666; padding: 16px;">Nenhuma doação registrada nesta janela</td></tr>'
-                : top
-                    .map((d, idx) => {
-                      const pct = Math.round((d.totalDiamonds / maxDiamonds) * 100);
-                      return `
-                  <tr>
-                    <td style="color: var(--admin-primary); font-weight: bold;">#${idx + 1}</td>
-                    <td style="color: #fff; font-weight: bold;">${d.userName}</td>
-                    <td style="color: #facc15; font-weight: bold;">💎 ${d.totalDiamonds}</td>
-                    <td>${d.count} presentes</td>
-                    <td style="width: 140px;">
-                      <div class="top-msg-bar-container">
-                        <div class="top-msg-bar" style="width: ${pct}%; background: #eab308;"></div>
-                      </div>
-                    </td>
-                  </tr>
-                `;
-                    })
-                    .join('')
-            }
-          </tbody>
+          <tbody id="admin-ranking-tbody"></tbody>
         </table>
       `;
     }
 
     if (this.activeTab === 'chat') {
-      const msgs = liveServiceMock.getChatMessages().slice(0, 25);
-      const topMsgs = liveServiceMock.getTopMessages(8);
-
       return `
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
           <!-- COLUNA 1: ÚLTIMAS MENSAGENS -->
           <div>
             <div class="font-pixel" style="font-size: 11px; color: var(--admin-primary); margin-bottom: 8px;">
-              FEED DE MENSAGENS AO VIVO
+              FEED DE MENSAGENS AO VIVO (SIMULADO)
             </div>
             <table class="arcade-table font-mono">
               <thead>
@@ -840,35 +764,14 @@ export class AdminPanel {
                   <th>MENSAGEM</th>
                 </tr>
               </thead>
-              <tbody>
-                ${
-                  msgs.length === 0
-                    ? '<tr><td colspan="4" style="text-align: center; color: #666; padding: 12px;">Nenhuma mensagem registrada</td></tr>'
-                    : msgs
-                        .map(
-                          (m) => `
-                      <tr>
-                        <td style="color: #94a3b8; font-size: 11px;">${new Date(m.timestamp).toLocaleTimeString()}</td>
-                        <td style="color: #ffffff; font-size: 12px; font-weight: bold;">${m.userName}</td>
-                        <td>
-                          <span style="background: ${m.candidateNumber === '13' ? '#dc2626' : '#2563eb'}; color: #fff; padding: 2px 6px; font-weight: bold; font-size: 11px;">
-                            ${m.candidateNumber}
-                          </span>
-                        </td>
-                        <td style="color: #ffffff; font-size: 12px;">${m.message}</td>
-                      </tr>
-                    `,
-                        )
-                        .join('')
-                }
-              </tbody>
+              <tbody id="admin-chat-feed-tbody"></tbody>
             </table>
           </div>
 
           <!-- COLUNA 2: TOP MENSAGENS MAIS FREQUENTES -->
           <div>
             <div class="font-pixel" style="font-size: 11px; color: #38bdf8; margin-bottom: 8px;">
-              TOP MENSAGENS MAIS FREQUENTES (AUDIÊNCIA)
+              TOP MENSAGENS MAIS FREQUENTES (SIMULADO)
             </div>
             <table class="arcade-table font-mono">
               <thead>
@@ -879,32 +782,7 @@ export class AdminPanel {
                   <th>% DA AUDIÊNCIA</th>
                 </tr>
               </thead>
-              <tbody>
-                ${
-                  topMsgs.length === 0
-                    ? '<tr><td colspan="4" style="text-align: center; color: #666; padding: 12px;">Sem dados de top mensagens</td></tr>'
-                    : topMsgs
-                        .map((tm) => {
-                          const candColor = tm.candidateNumber === '13' ? '#dc2626' : tm.candidateNumber === '22' ? '#2563eb' : '#64748b';
-                          return `
-                      <tr>
-                        <td style="color: #fff; font-weight: bold;">"${tm.text}"</td>
-                        <td><span style="background: ${candColor}; color: #fff; padding: 1px 4px;">${tm.candidateNumber.toUpperCase()}</span></td>
-                        <td style="color: #facc15; font-weight: bold;">${tm.count}</td>
-                        <td style="width: 120px;">
-                          <div style="display: flex; align-items: center; gap: 6px;">
-                            <div class="top-msg-bar-container" style="flex: 1;">
-                              <div class="top-msg-bar" style="width: ${tm.percentage}%; background: ${candColor};"></div>
-                            </div>
-                            <span style="font-size: 11px; color: #ffffff;">${tm.percentage}%</span>
-                          </div>
-                        </td>
-                      </tr>
-                    `;
-                        })
-                        .join('')
-                }
-              </tbody>
+              <tbody id="admin-chat-top-tbody"></tbody>
             </table>
           </div>
         </div>
@@ -919,19 +797,19 @@ export class AdminPanel {
           <div class="arcade-panel" style="padding: 12px; border-left: 4px solid ${profiles.lula.color};">
             <div class="font-pixel" style="font-size: 13px; color: #f87171; margin-bottom: 8px;">CANDIDATO 1</div>
             <label for="admin-cand-name-lula" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Nome Exibido:</label>
-            <input type="text" id="admin-cand-name-lula" class="arcade-input" value="${profiles.lula.name}" style="margin-bottom: 8px; font-size: 12px;" />
+            <input type="text" id="admin-cand-name-lula" class="arcade-input" value="${escapeHtml(profiles.lula.name)}" style="margin-bottom: 8px; font-size: 12px;" />
 
             <label for="admin-cand-num-lula" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Número Eleitoral:</label>
-            <input type="text" id="admin-cand-num-lula" class="arcade-input" value="${profiles.lula.number}" style="margin-bottom: 8px; font-size: 12px;" />
+            <input type="text" id="admin-cand-num-lula" class="arcade-input" value="${escapeHtml(profiles.lula.number)}" style="margin-bottom: 8px; font-size: 12px;" />
 
             <label for="admin-cand-color-lula" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Cor Principal (Hex):</label>
             <div style="display: flex; gap: 6px; margin-bottom: 8px;">
-              <input type="color" id="admin-cand-color-picker-lula" aria-label="Seletor de cor Lula" value="${profiles.lula.color}" style="width: 36px; height: 32px; padding: 0; background: none; border: 1px solid #000; cursor: pointer;" />
-              <input type="text" id="admin-cand-color-lula" class="arcade-input" value="${profiles.lula.color}" style="font-size: 12px;" />
+              <input type="color" id="admin-cand-color-picker-lula" aria-label="Seletor de cor Lula" value="${escapeHtml(profiles.lula.color)}" style="width: 36px; height: 32px; padding: 0; background: none; border: 1px solid #000; cursor: pointer;" />
+              <input type="text" id="admin-cand-color-lula" class="arcade-input" value="${escapeHtml(profiles.lula.color)}" style="font-size: 12px;" />
             </div>
 
             <label for="admin-cand-avatar-lula" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">URL do Avatar / Cabeça (opcional):</label>
-            <input type="text" id="admin-cand-avatar-lula" class="arcade-input" value="${profiles.lula.avatarUrl}" placeholder="https://…" style="margin-bottom: 12px; font-size: 12px;" />
+            <input type="text" id="admin-cand-avatar-lula" class="arcade-input" value="${escapeHtml(profiles.lula.avatarUrl)}" placeholder="https://…" style="margin-bottom: 12px; font-size: 12px;" />
 
             <button id="admin-btn-save-cand-lula" class="arcade-btn arcade-btn-danger" style="font-size: 12px; width: 100%; padding: 8px 12px;">
               Salvar Alterações Candidato 1
@@ -942,19 +820,19 @@ export class AdminPanel {
           <div class="arcade-panel" style="padding: 12px; border-left: 4px solid ${profiles.flavio.color};">
             <div class="font-pixel" style="font-size: 13px; color: #60a5fa; margin-bottom: 8px;">CANDIDATO 2</div>
             <label for="admin-cand-name-flavio" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Nome Exibido:</label>
-            <input type="text" id="admin-cand-name-flavio" class="arcade-input" value="${profiles.flavio.name}" style="margin-bottom: 8px; font-size: 12px;" />
+            <input type="text" id="admin-cand-name-flavio" class="arcade-input" value="${escapeHtml(profiles.flavio.name)}" style="margin-bottom: 8px; font-size: 12px;" />
 
             <label for="admin-cand-num-flavio" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Número Eleitoral:</label>
-            <input type="text" id="admin-cand-num-flavio" class="arcade-input" value="${profiles.flavio.number}" style="margin-bottom: 8px; font-size: 12px;" />
+            <input type="text" id="admin-cand-num-flavio" class="arcade-input" value="${escapeHtml(profiles.flavio.number)}" style="margin-bottom: 8px; font-size: 12px;" />
 
             <label for="admin-cand-color-flavio" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Cor Principal (Hex):</label>
             <div style="display: flex; gap: 6px; margin-bottom: 8px;">
-              <input type="color" id="admin-cand-color-picker-flavio" aria-label="Seletor de cor Flávio" value="${profiles.flavio.color}" style="width: 36px; height: 32px; padding: 0; background: none; border: 1px solid #000; cursor: pointer;" />
-              <input type="text" id="admin-cand-color-flavio" class="arcade-input" value="${profiles.flavio.color}" style="font-size: 12px;" />
+              <input type="color" id="admin-cand-color-picker-flavio" aria-label="Seletor de cor Flávio" value="${escapeHtml(profiles.flavio.color)}" style="width: 36px; height: 32px; padding: 0; background: none; border: 1px solid #000; cursor: pointer;" />
+              <input type="text" id="admin-cand-color-flavio" class="arcade-input" value="${escapeHtml(profiles.flavio.color)}" style="font-size: 12px;" />
             </div>
 
             <label for="admin-cand-avatar-flavio" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">URL do Avatar / Cabeça (opcional):</label>
-            <input type="text" id="admin-cand-avatar-flavio" class="arcade-input" value="${profiles.flavio.avatarUrl}" placeholder="https://…" style="margin-bottom: 12px; font-size: 12px;" />
+            <input type="text" id="admin-cand-avatar-flavio" class="arcade-input" value="${escapeHtml(profiles.flavio.avatarUrl)}" placeholder="https://…" style="margin-bottom: 12px; font-size: 12px;" />
 
             <button id="admin-btn-save-cand-flavio" class="arcade-btn arcade-btn-primary" style="font-size: 12px; width: 100%; background: #2563eb; color: #fff; padding: 8px 12px;">
               Salvar Alterações Candidato 2
@@ -965,7 +843,6 @@ export class AdminPanel {
     }
 
     if (this.activeTab === 'gifts') {
-      const list = giftRegistry.list();
       return `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <div style="font-size: 11px; color: #cbd5e1;">
@@ -987,30 +864,7 @@ export class AdminPanel {
               <th>AÇÕES</th>
             </tr>
           </thead>
-          <tbody>
-            ${list
-              .map(
-                (g) => `
-              <tr>
-                <td style="color: #94a3b8; font-size: 11px;">${g.giftId}</td>
-                <td style="color: #fff; font-weight: bold; font-size: 12px;">${g.name}</td>
-                <td style="color: #ffd165; font-weight: bold; font-size: 12px;">💎 ${g.diamondCost}</td>
-                <td><span style="color: #38bdf8; font-size: 12px;">${g.power}</span></td>
-                <td>
-                  <span style="color: ${g.candidateBenefited === 'lula' ? '#f87171' : '#60a5fa'}; font-weight: bold; font-size: 12px;">
-                    ${g.candidateBenefited.toUpperCase()}
-                  </span>
-                </td>
-                <td>
-                  <button class="arcade-btn arcade-btn-dark btn-edit-gift" data-giftid="${g.giftId}" style="font-size: 11px; padding: 4px 8px;">
-                    ✏️ Editar
-                  </button>
-                </td>
-              </tr>
-            `,
-              )
-              .join('')}
-          </tbody>
+          <tbody id="admin-gifts-tbody"></tbody>
         </table>
       `;
     }
@@ -1182,13 +1036,13 @@ export class AdminPanel {
       <div class="arcade-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-gift-title">
         <div class="arcade-modal-dialog">
           <div id="modal-gift-title" class="font-pixel" style="font-size: 13px; color: var(--admin-primary); margin-bottom: 14px; border-bottom: 2px solid #000; padding-bottom: 8px;">
-            EDITAR PRESENTE: ${gift.name.toUpperCase()} (${gift.giftId})
+            EDITAR PRESENTE: ${escapeHtml(gift.name.toUpperCase())} (${escapeHtml(gift.giftId)})
           </div>
 
           <form id="form-edit-gift" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px;">
             <div>
               <label for="gift-edit-name" style="font-size: 12px; color: var(--admin-outline); font-weight: bold; display: block; margin-bottom: 3px;">Nome:</label>
-              <input type="text" id="gift-edit-name" class="arcade-input" value="${gift.name}" style="font-size: 12px;" />
+              <input type="text" id="gift-edit-name" class="arcade-input" value="${escapeHtml(gift.name)}" style="font-size: 12px;" />
             </div>
 
             <div>
@@ -1632,7 +1486,315 @@ export class AdminPanel {
     if (!el) return;
 
     el.innerHTML = this.renderTabContent();
+    this.populateTabTables(el);
     this.bindTabEvents(el);
+  }
+
+  public populateTabTables(container: HTMLElement | null): void {
+    if (!container) return;
+
+    if (this.activeTab === 'telemetry') {
+      const tbody = container.querySelector('#admin-telemetry-tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      const allLogs = this.engine.getLogs();
+      const filteredLogs = allLogs.filter((log) => {
+        if (this.logFilter === 'all') return true;
+        if (this.logFilter === 'applied') return log.kind === 'event_decision' && log.applied;
+        if (this.logFilter === 'ignored') return log.kind === 'event_decision' && !log.applied;
+        if (this.logFilter === 'chat') return log.kind === 'event_decision' && log.event.type === 'chat';
+        if (this.logFilter === 'gifts') return log.kind === 'event_decision' && log.event.type === 'gift';
+        if (this.logFilter === 'system') return log.kind === 'lifecycle';
+        return true;
+      });
+
+      if (filteredLogs.length === 0) {
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.colSpan = 5;
+        td.style.cssText = 'text-align: center; color: #666; padding: 16px;';
+        td.textContent = 'Nenhum evento registrado nesta categoria';
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+        return;
+      }
+
+      for (const log of filteredLogs.slice(-50).reverse()) {
+        const isDecision = log.kind === 'event_decision';
+        const statusColor = isDecision ? (log.applied ? '#34d399' : '#f87171') : '#60a5fa';
+        const statusText = isDecision ? (log.applied ? 'APLICADO' : 'IGNORADO') : 'SISTEMA';
+
+        let badgeClass = 'log-badge-system';
+        let badgeText = 'SISTEMA';
+        let originText = 'SISTEMA';
+        let payloadText = '';
+
+        if (isDecision) {
+          originText = log.event.userId.startsWith('donor_')
+            ? '@doador'
+            : log.event.userId.startsWith('spam_')
+              ? '@espectador'
+              : '@operador';
+          if (log.event.type === 'gift') {
+            badgeClass = 'log-badge-gift';
+            badgeText = 'GIFT';
+            payloadText = `🎁 Presente ${log.event.giftId} (${log.event.power}) → ${log.event.candidateBenefited.toUpperCase()}`;
+          } else {
+            badgeClass = 'log-badge-chat';
+            badgeText = 'CHAT';
+            payloadText = `Chat para ${log.event.candidateId.toUpperCase()} (${log.reason})`;
+          }
+        } else {
+          payloadText = log.description;
+        }
+
+        const tr = document.createElement('tr');
+
+        const tdTime = document.createElement('td');
+        tdTime.style.cssText = 'color: #94a3b8; font-size: 11px;';
+        tdTime.textContent = new Date(log.timeIso).toLocaleTimeString();
+        tr.appendChild(tdTime);
+
+        const tdBadge = document.createElement('td');
+        const badgeSpan = document.createElement('span');
+        badgeSpan.className = badgeClass;
+        badgeSpan.textContent = badgeText;
+        tdBadge.appendChild(badgeSpan);
+        tr.appendChild(tdBadge);
+
+        const tdOrigin = document.createElement('td');
+        tdOrigin.style.cssText = 'color: #cbd5e1; font-size: 12px; font-weight: 500;';
+        tdOrigin.textContent = originText;
+        tr.appendChild(tdOrigin);
+
+        const tdPayload = document.createElement('td');
+        tdPayload.style.cssText = 'color: #ffffff; font-size: 12px; word-break: break-word;';
+        tdPayload.textContent = payloadText;
+        tr.appendChild(tdPayload);
+
+        const tdStatus = document.createElement('td');
+        tdStatus.style.cssText = `text-align: right; color: ${statusColor}; font-weight: bold; font-size: 12px;`;
+        tdStatus.className = 'font-pixel';
+        tdStatus.textContent = statusText;
+        tr.appendChild(tdStatus);
+
+        tbody.appendChild(tr);
+      }
+    } else if (this.activeTab === 'ranking') {
+      const tbody = container.querySelector('#admin-ranking-tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      const windowMs = this.donorWindow === '15m' ? 15 * 60 * 1000 : undefined;
+      const top = liveServiceMock.getTopDonors(10, windowMs);
+      const maxDiamonds = top.length > 0 ? top[0].totalDiamonds : 1;
+
+      if (top.length === 0) {
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.colSpan = 5;
+        td.style.cssText = 'text-align: center; color: #666; padding: 16px;';
+        td.textContent = 'Nenhuma doação registrada nesta janela';
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+        return;
+      }
+
+      top.forEach((d, idx) => {
+        const pct = Math.round((d.totalDiamonds / maxDiamonds) * 100);
+        const tr = document.createElement('tr');
+
+        const tdPos = document.createElement('td');
+        tdPos.style.cssText = 'color: var(--admin-primary); font-weight: bold;';
+        tdPos.textContent = `#${idx + 1}`;
+        tr.appendChild(tdPos);
+
+        const tdUser = document.createElement('td');
+        tdUser.style.cssText = 'color: #fff; font-weight: bold;';
+        tdUser.textContent = d.userName;
+        tr.appendChild(tdUser);
+
+        const tdDia = document.createElement('td');
+        tdDia.style.cssText = 'color: #facc15; font-weight: bold;';
+        tdDia.textContent = `💎 ${d.totalDiamonds}`;
+        tr.appendChild(tdDia);
+
+        const tdCount = document.createElement('td');
+        tdCount.textContent = `${d.count} presentes`;
+        tr.appendChild(tdCount);
+
+        const tdBar = document.createElement('td');
+        tdBar.style.width = '140px';
+        const barContainer = document.createElement('div');
+        barContainer.className = 'top-msg-bar-container';
+        const bar = document.createElement('div');
+        bar.className = 'top-msg-bar';
+        bar.style.width = `${pct}%`;
+        bar.style.background = '#eab308';
+        barContainer.appendChild(bar);
+        tdBar.appendChild(barContainer);
+        tr.appendChild(tdBar);
+
+        tbody.appendChild(tr);
+      });
+    } else if (this.activeTab === 'chat') {
+      const feedTbody = container.querySelector('#admin-chat-feed-tbody');
+      const topTbody = container.querySelector('#admin-chat-top-tbody');
+
+      if (feedTbody) {
+        feedTbody.innerHTML = '';
+        const msgs = liveServiceMock.getChatMessages().slice(0, 25);
+
+        if (msgs.length === 0) {
+          const tr = document.createElement('tr');
+          const td = document.createElement('td');
+          td.colSpan = 4;
+          td.style.cssText = 'text-align: center; color: #666; padding: 12px;';
+          td.textContent = 'Nenhuma mensagem registrada';
+          tr.appendChild(td);
+          feedTbody.appendChild(tr);
+        } else {
+          for (const m of msgs) {
+            const tr = document.createElement('tr');
+
+            const tdTime = document.createElement('td');
+            tdTime.style.cssText = 'color: #94a3b8; font-size: 11px;';
+            tdTime.textContent = new Date(m.timestamp).toLocaleTimeString();
+            tr.appendChild(tdTime);
+
+            const tdUser = document.createElement('td');
+            tdUser.style.cssText = 'color: #ffffff; font-size: 12px; font-weight: bold;';
+            tdUser.textContent = m.userName;
+            tr.appendChild(tdUser);
+
+            const tdVote = document.createElement('td');
+            const spanVote = document.createElement('span');
+            spanVote.style.cssText = `background: ${
+              m.candidateNumber === '13' ? '#dc2626' : '#2563eb'
+            }; color: #fff; padding: 2px 6px; font-weight: bold; font-size: 11px;`;
+            spanVote.textContent = m.candidateNumber;
+            tdVote.appendChild(spanVote);
+            tr.appendChild(tdVote);
+
+            const tdMsg = document.createElement('td');
+            tdMsg.style.cssText = 'color: #ffffff; font-size: 12px;';
+            tdMsg.textContent = m.message;
+            tr.appendChild(tdMsg);
+
+            feedTbody.appendChild(tr);
+          }
+        }
+      }
+
+      if (topTbody) {
+        topTbody.innerHTML = '';
+        const topMsgs = liveServiceMock.getTopMessages(8);
+
+        if (topMsgs.length === 0) {
+          const tr = document.createElement('tr');
+          const td = document.createElement('td');
+          td.colSpan = 4;
+          td.style.cssText = 'text-align: center; color: #666; padding: 12px;';
+          td.textContent = 'Sem dados de top mensagens';
+          tr.appendChild(td);
+          topTbody.appendChild(tr);
+        } else {
+          for (const tm of topMsgs) {
+            const candColor = tm.candidateNumber === '13' ? '#dc2626' : tm.candidateNumber === '22' ? '#2563eb' : '#64748b';
+            const tr = document.createElement('tr');
+
+            const tdMsg = document.createElement('td');
+            tdMsg.style.cssText = 'color: #fff; font-weight: bold;';
+            tdMsg.textContent = `"${tm.text}"`;
+            tr.appendChild(tdMsg);
+
+            const tdVote = document.createElement('td');
+            const spanVote = document.createElement('span');
+            spanVote.style.cssText = `background: ${candColor}; color: #fff; padding: 1px 4px;`;
+            spanVote.textContent = tm.candidateNumber.toUpperCase();
+            tdVote.appendChild(spanVote);
+            tr.appendChild(tdVote);
+
+            const tdCount = document.createElement('td');
+            tdCount.style.cssText = 'color: #facc15; font-weight: bold;';
+            tdCount.textContent = String(tm.count);
+            tr.appendChild(tdCount);
+
+            const tdBar = document.createElement('td');
+            tdBar.style.width = '120px';
+            const flexDiv = document.createElement('div');
+            flexDiv.style.cssText = 'display: flex; align-items: center; gap: 6px;';
+            const barContainer = document.createElement('div');
+            barContainer.className = 'top-msg-bar-container';
+            barContainer.style.flex = '1';
+            const bar = document.createElement('div');
+            bar.className = 'top-msg-bar';
+            bar.style.width = `${tm.percentage}%`;
+            bar.style.background = candColor;
+            barContainer.appendChild(bar);
+            const spanPct = document.createElement('span');
+            spanPct.style.cssText = 'font-size: 11px; color: #ffffff;';
+            spanPct.textContent = `${tm.percentage}%`;
+            flexDiv.appendChild(barContainer);
+            flexDiv.appendChild(spanPct);
+            tdBar.appendChild(flexDiv);
+            tr.appendChild(tdBar);
+
+            topTbody.appendChild(tr);
+          }
+        }
+      }
+    } else if (this.activeTab === 'gifts') {
+      const tbody = container.querySelector('#admin-gifts-tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      const list = giftRegistry.list();
+
+      for (const g of list) {
+        const tr = document.createElement('tr');
+
+        const tdId = document.createElement('td');
+        tdId.style.cssText = 'color: #94a3b8; font-size: 11px;';
+        tdId.textContent = g.giftId;
+        tr.appendChild(tdId);
+
+        const tdName = document.createElement('td');
+        tdName.style.cssText = 'color: #fff; font-weight: bold; font-size: 12px;';
+        tdName.textContent = g.name;
+        tr.appendChild(tdName);
+
+        const tdCost = document.createElement('td');
+        tdCost.style.cssText = 'color: #ffd165; font-weight: bold; font-size: 12px;';
+        tdCost.textContent = `💎 ${g.diamondCost}`;
+        tr.appendChild(tdCost);
+
+        const tdPower = document.createElement('td');
+        const spanPower = document.createElement('span');
+        spanPower.style.cssText = 'color: #38bdf8; font-size: 12px;';
+        spanPower.textContent = g.power;
+        tdPower.appendChild(spanPower);
+        tr.appendChild(tdPower);
+
+        const tdCand = document.createElement('td');
+        const spanCand = document.createElement('span');
+        spanCand.style.cssText = `color: ${g.candidateBenefited === 'lula' ? '#f87171' : '#60a5fa'}; font-weight: bold; font-size: 12px;`;
+        spanCand.textContent = g.candidateBenefited.toUpperCase();
+        tdCand.appendChild(spanCand);
+        tr.appendChild(tdCand);
+
+        const tdActions = document.createElement('td');
+        const btnEdit = document.createElement('button');
+        btnEdit.className = 'arcade-btn arcade-btn-dark btn-edit-gift';
+        btnEdit.setAttribute('data-giftid', g.giftId);
+        btnEdit.style.cssText = 'font-size: 11px; padding: 4px 8px;';
+        btnEdit.textContent = '✏️ Editar';
+        tdActions.appendChild(btnEdit);
+        tr.appendChild(tdActions);
+
+        tbody.appendChild(tr);
+      }
+    }
   }
 
   private bindTabEvents(el: HTMLElement | null): void {
@@ -1741,7 +1903,7 @@ export class AdminPanel {
     const liveStatus = liveServiceMock.getConnectionStatus();
     const liveBadge = document.getElementById('admin-live-badge');
     if (liveBadge) {
-      liveBadge.textContent = liveStatus.state.toUpperCase();
+      liveBadge.textContent = `${liveStatus.state.toUpperCase()} (SIMULADO)`;
       liveBadge.style.background =
         liveStatus.state === 'connected' ? '#064e3b' : liveStatus.state === 'reconnecting' ? '#78350f' : '#7f1d1d';
       liveBadge.style.color =
