@@ -103,7 +103,8 @@ describe('AdminPanel - Segurança contra XSS e Sanitização de Conteúdo Extern
         userId: 'donor_xss',
         userName: maliciousDonor,
         giftId: 'rose',
-        diamondCost: 50,
+        giftName: 'Rosa',
+        diamonds: 999999,
         timestamp: Date.now(),
       });
 
@@ -120,10 +121,10 @@ describe('AdminPanel - Segurança contra XSS e Sanitização de Conteúdo Extern
       // Garante que nenhuma tag img foi instanciada
       expect(tbody.querySelectorAll('img').length).toBe(0);
 
-      const userCell = tbody.querySelector('td:nth-child(2)');
-      expect(userCell).not.toBeNull();
-      expect(userCell!.textContent).toBe(maliciousDonor);
-      expect(userCell!.innerHTML).not.toContain('<img');
+      const userCells = Array.from(tbody.querySelectorAll('tr td:nth-child(2)'));
+      const found = userCells.find((c) => c.textContent === maliciousDonor);
+      expect(found).toBeDefined();
+      expect(found!.innerHTML).not.toContain('<img');
       expect((window as any).__xss_donor).toBeUndefined();
     });
   });
@@ -163,7 +164,7 @@ describe('AdminPanel - Segurança contra XSS e Sanitização de Conteúdo Extern
       const xssLogMsg = '<img src=x onerror="window.__xss_log=true">';
       engine.handleEvent({
         type: 'chat',
-        userId: 'user_xss_test',
+        userId: xssLogMsg,
         candidateId: 'lula',
         timestamp: Date.now(),
       });
