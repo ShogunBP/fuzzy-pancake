@@ -206,8 +206,8 @@ export class AdminPanel {
               <span id="admin-score-lula" class="font-pixel" style="font-size: 16px; color: #fff;">${scores.session.lula}</span>
               <span style="font-size: 14px; color: #ffd165;">★</span>
               <div style="display: flex; flex-direction: column; gap: 1px;">
-                <button id="btn-score-lula-inc" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 1px 4px; line-height: 1;" title="+1 Vitória Lula" aria-label="Incrementar vitórias Lula">▲</button>
-                <button id="btn-score-lula-dec" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 1px 4px; line-height: 1;" title="-1 Vitória Lula" aria-label="Decrementar vitórias Lula">▼</button>
+                <button id="btn-score-lula-inc" class="arcade-btn arcade-btn-dark arcade-micro-btn" title="+1 Vitória Lula" aria-label="Incrementar vitórias Lula">▲</button>
+                <button id="btn-score-lula-dec" class="arcade-btn arcade-btn-dark arcade-micro-btn" title="-1 Vitória Lula" aria-label="Decrementar vitórias Lula">▼</button>
               </div>
             </div>
 
@@ -216,8 +216,8 @@ export class AdminPanel {
             <!-- Flávio 22 -->
             <div style="display: flex; align-items: center; gap: 6px;">
               <div style="display: flex; flex-direction: column; gap: 1px;">
-                <button id="btn-score-flavio-inc" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 1px 4px; line-height: 1;" title="+1 Vitória Flávio" aria-label="Incrementar vitórias Flávio">▲</button>
-                <button id="btn-score-flavio-dec" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 1px 4px; line-height: 1;" title="-1 Vitória Flávio" aria-label="Decrementar vitórias Flávio">▼</button>
+                <button id="btn-score-flavio-inc" class="arcade-btn arcade-btn-dark arcade-micro-btn" title="+1 Vitória Flávio" aria-label="Incrementar vitórias Flávio">▲</button>
+                <button id="btn-score-flavio-dec" class="arcade-btn arcade-btn-dark arcade-micro-btn" title="-1 Vitória Flávio" aria-label="Decrementar vitórias Flávio">▼</button>
               </div>
               <span style="font-size: 14px; color: #ffd165;">★</span>
               <span id="admin-score-flavio" class="font-pixel" style="font-size: 16px; color: #fff;">${scores.session.flavio}</span>

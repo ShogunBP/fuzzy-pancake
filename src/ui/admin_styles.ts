@@ -31,7 +31,7 @@ export const ADMIN_STYLES = `
 body.admin-body {
   background: #0f131d;
   color: #dfe2f1;
-  font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -66,8 +66,24 @@ body.admin-body {
   font-variant-numeric: tabular-nums;
 }
 .font-mono {
-  font-family: 'Geist', monospace;
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, monospace;
   font-variant-numeric: tabular-nums;
+}
+
+/* Micro-botões com hit-target ampliado para acessibilidade e toque */
+.arcade-micro-btn {
+  font-size: 11px;
+  padding: 2px 5px;
+  line-height: 1;
+  position: relative;
+  min-width: 22px;
+  min-height: 16px;
+}
+.arcade-micro-btn::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  z-index: 1;
 }
 
 /* 16-Bit Pixel Borders & Arcade Shadows from dev/mock/DESIGN.md */
