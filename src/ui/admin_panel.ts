@@ -85,16 +85,20 @@ export class AdminPanel {
             <input
               type="password"
               id="admin-pin-input"
+              name="pin"
+              inputmode="numeric"
+              aria-label="PIN de segurança do operador"
               class="arcade-input font-pixel admin-auth-pin"
               placeholder="••••"
               maxlength="8"
               autocomplete="off"
+              spellcheck="false"
               autofocus
             />
 
             ${
               errorMessage
-                ? `<div id="admin-auth-error" class="font-pixel" style="font-size: 9px; color: #ef4444; background: #450a0a; padding: 6px; border: 1px solid #dc2626;">
+                ? `<div id="admin-auth-error" role="alert" aria-live="polite" class="font-pixel" style="font-size: 11px; color: #f87171; background: #450a0a; padding: 6px; border: 1px solid #dc2626;">
                     ${errorMessage}
                   </div>`
                 : ''
@@ -103,7 +107,7 @@ export class AdminPanel {
             <button type="submit" class="arcade-btn arcade-btn-primary" style="padding: 10px; font-size: 12px;">
               DESBLOQUEAR COCKPIT
             </button>
-            <div style="font-size: 9px; color: #64748b; font-family: monospace;">
+            <div style="font-size: 11px; color: #94a3b8; font-family: monospace;">
               PIN padrão do operador: 2026
             </div>
           </form>
@@ -565,7 +569,7 @@ export class AdminPanel {
                 type="text"
                 id="admin-param-search"
                 class="arcade-input"
-                placeholder="Buscar parâmetro de tuning..."
+                placeholder="Buscar parâmetro de tuning…"
                 value="${this.paramSearchQuery}"
                 aria-label="Buscar parâmetro de tuning"
               />
@@ -640,7 +644,7 @@ export class AdminPanel {
             <span class="font-mono" style="font-size: 12px; color: #ffd165; font-weight: bold; white-space: nowrap;">
               💎 ${g.diamondCost}
             </span>
-            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">provisório</span>
+            <span style="font-size: 11px; color: #94a3b8; text-transform: uppercase;">provisório</span>
           </div>
         </button>
       `;
@@ -686,10 +690,10 @@ export class AdminPanel {
               <span style="color: #34d399;">OK: <strong>${appliedCount}</strong></span>
               <span style="color: #f87171;">IGN: <strong>${ignoredCount}</strong></span>
             </div>
-            <button id="admin-btn-export-logs" class="arcade-btn arcade-btn-dark" style="font-size: 8px; padding: 3px 6px;">
+            <button id="admin-btn-export-logs" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 4px 8px;">
               💾 Exportar JSON
             </button>
-            <button id="admin-btn-clear-logs" class="arcade-btn arcade-btn-dark" style="font-size: 8px; padding: 3px 6px;">
+            <button id="admin-btn-clear-logs" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 4px 8px;">
               Limpar Log
             </button>
           </div>
@@ -761,7 +765,7 @@ export class AdminPanel {
 
       return `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <div style="font-size: 10px; color: #9b8f79;">
+          <div style="font-size: 11px; color: var(--admin-outline);">
             Maiores doadores da live classificados por volume de diamantes
           </div>
           <div style="display: flex; gap: 4px;">
@@ -884,7 +888,7 @@ export class AdminPanel {
                             <div class="top-msg-bar-container" style="flex: 1;">
                               <div class="top-msg-bar" style="width: ${tm.percentage}%; background: ${candColor};"></div>
                             </div>
-                            <span style="font-size: 9px; color: #dfe2f1;">${tm.percentage}%</span>
+                            <span style="font-size: 11px; color: #ffffff;">${tm.percentage}%</span>
                           </div>
                         </td>
                       </tr>
@@ -906,20 +910,20 @@ export class AdminPanel {
           <!-- Candidato 1: Lula -->
           <div class="arcade-panel" style="padding: 12px; border-left: 4px solid ${profiles.lula.color};">
             <div class="font-pixel" style="font-size: 13px; color: #f87171; margin-bottom: 8px;">CANDIDATO 1</div>
-            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Nome Exibido:</label>
+            <label for="admin-cand-name-lula" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Nome Exibido:</label>
             <input type="text" id="admin-cand-name-lula" class="arcade-input" value="${profiles.lula.name}" style="margin-bottom: 8px; font-size: 12px;" />
 
-            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Número Eleitoral:</label>
+            <label for="admin-cand-num-lula" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Número Eleitoral:</label>
             <input type="text" id="admin-cand-num-lula" class="arcade-input" value="${profiles.lula.number}" style="margin-bottom: 8px; font-size: 12px;" />
 
-            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Cor Principal (Hex):</label>
+            <label for="admin-cand-color-lula" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Cor Principal (Hex):</label>
             <div style="display: flex; gap: 6px; margin-bottom: 8px;">
-              <input type="color" id="admin-cand-color-picker-lula" value="${profiles.lula.color}" style="width: 36px; height: 32px; padding: 0; background: none; border: 1px solid #000; cursor: pointer;" />
+              <input type="color" id="admin-cand-color-picker-lula" aria-label="Seletor de cor Lula" value="${profiles.lula.color}" style="width: 36px; height: 32px; padding: 0; background: none; border: 1px solid #000; cursor: pointer;" />
               <input type="text" id="admin-cand-color-lula" class="arcade-input" value="${profiles.lula.color}" style="font-size: 12px;" />
             </div>
 
-            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">URL do Avatar / Cabeça (opcional):</label>
-            <input type="text" id="admin-cand-avatar-lula" class="arcade-input" value="${profiles.lula.avatarUrl}" placeholder="https://..." style="margin-bottom: 12px; font-size: 12px;" />
+            <label for="admin-cand-avatar-lula" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">URL do Avatar / Cabeça (opcional):</label>
+            <input type="text" id="admin-cand-avatar-lula" class="arcade-input" value="${profiles.lula.avatarUrl}" placeholder="https://…" style="margin-bottom: 12px; font-size: 12px;" />
 
             <button id="admin-btn-save-cand-lula" class="arcade-btn arcade-btn-danger" style="font-size: 12px; width: 100%; padding: 8px 12px;">
               Salvar Alterações Candidato 1
@@ -929,20 +933,20 @@ export class AdminPanel {
           <!-- Candidato 2: Flávio -->
           <div class="arcade-panel" style="padding: 12px; border-left: 4px solid ${profiles.flavio.color};">
             <div class="font-pixel" style="font-size: 13px; color: #60a5fa; margin-bottom: 8px;">CANDIDATO 2</div>
-            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Nome Exibido:</label>
+            <label for="admin-cand-name-flavio" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Nome Exibido:</label>
             <input type="text" id="admin-cand-name-flavio" class="arcade-input" value="${profiles.flavio.name}" style="margin-bottom: 8px; font-size: 12px;" />
 
-            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Número Eleitoral:</label>
+            <label for="admin-cand-num-flavio" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Número Eleitoral:</label>
             <input type="text" id="admin-cand-num-flavio" class="arcade-input" value="${profiles.flavio.number}" style="margin-bottom: 8px; font-size: 12px;" />
 
-            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Cor Principal (Hex):</label>
+            <label for="admin-cand-color-flavio" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Cor Principal (Hex):</label>
             <div style="display: flex; gap: 6px; margin-bottom: 8px;">
-              <input type="color" id="admin-cand-color-picker-flavio" value="${profiles.flavio.color}" style="width: 36px; height: 32px; padding: 0; background: none; border: 1px solid #000; cursor: pointer;" />
+              <input type="color" id="admin-cand-color-picker-flavio" aria-label="Seletor de cor Flávio" value="${profiles.flavio.color}" style="width: 36px; height: 32px; padding: 0; background: none; border: 1px solid #000; cursor: pointer;" />
               <input type="text" id="admin-cand-color-flavio" class="arcade-input" value="${profiles.flavio.color}" style="font-size: 12px;" />
             </div>
 
-            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">URL do Avatar / Cabeça (opcional):</label>
-            <input type="text" id="admin-cand-avatar-flavio" class="arcade-input" value="${profiles.flavio.avatarUrl}" placeholder="https://..." style="margin-bottom: 12px; font-size: 12px;" />
+            <label for="admin-cand-avatar-flavio" style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">URL do Avatar / Cabeça (opcional):</label>
+            <input type="text" id="admin-cand-avatar-flavio" class="arcade-input" value="${profiles.flavio.avatarUrl}" placeholder="https://…" style="margin-bottom: 12px; font-size: 12px;" />
 
             <button id="admin-btn-save-cand-flavio" class="arcade-btn arcade-btn-primary" style="font-size: 12px; width: 100%; background: #2563eb; color: #fff; padding: 8px 12px;">
               Salvar Alterações Candidato 2
@@ -1124,36 +1128,36 @@ export class AdminPanel {
   private renderScoreModalHtml(): string {
     const scores = this.engine.getScores();
     return `
-      <div class="arcade-modal-backdrop">
+      <div class="arcade-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-score-title">
         <div class="arcade-modal-dialog">
-          <div class="font-pixel" style="font-size: 10px; color: var(--admin-primary); margin-bottom: 12px; border-bottom: 2px solid #000; padding-bottom: 6px;">
+          <div id="modal-score-title" class="font-pixel" style="font-size: 13px; color: var(--admin-primary); margin-bottom: 14px; border-bottom: 2px solid #000; padding-bottom: 8px;">
             AJUSTAR OU ZERAR PLACAR
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="color: #ef4444; font-weight: bold;">Vitórias Lula (Sessão):</span>
-              <input type="number" id="modal-score-session-lula" class="arcade-input font-mono" style="width: 80px;" value="${scores.session.lula}" min="0" />
+              <label for="modal-score-session-lula" style="color: #f87171; font-weight: bold; font-size: 12px;">Vitórias Lula (Sessão):</label>
+              <input type="number" id="modal-score-session-lula" class="arcade-input font-mono" style="width: 80px; font-size: 12px;" value="${scores.session.lula}" min="0" aria-label="Vitórias de Lula na Sessão" />
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="color: #3b82f6; font-weight: bold;">Vitórias Flávio (Sessão):</span>
-              <input type="number" id="modal-score-session-flavio" class="arcade-input font-mono" style="width: 80px;" value="${scores.session.flavio}" min="0" />
+              <label for="modal-score-session-flavio" style="color: #60a5fa; font-weight: bold; font-size: 12px;">Vitórias Flávio (Sessão):</label>
+              <input type="number" id="modal-score-session-flavio" class="arcade-input font-mono" style="width: 80px; font-size: 12px;" value="${scores.session.flavio}" min="0" aria-label="Vitórias de Flávio na Sessão" />
             </div>
           </div>
 
           <div style="display: flex; flex-direction: column; gap: 8px;">
-            <button id="modal-btn-save-scores" class="arcade-btn arcade-btn-green" style="font-size: 10px;">
+            <button id="modal-btn-save-scores" class="arcade-btn arcade-btn-green" style="font-size: 12px; padding: 8px;">
               SALVAR VALORES DO PLACAR
             </button>
             <div style="display: flex; gap: 8px;">
-              <button id="modal-btn-reset-session" class="arcade-btn arcade-btn-amber" style="flex: 1; font-size: 9px;">
+              <button id="modal-btn-reset-session" class="arcade-btn arcade-btn-amber" style="flex: 1; font-size: 11px; padding: 6px;">
                 ZERAR SESSÃO
               </button>
-              <button id="modal-btn-reset-total" class="arcade-btn arcade-btn-danger" style="flex: 1; font-size: 9px;">
+              <button id="modal-btn-reset-total" class="arcade-btn arcade-btn-danger" style="flex: 1; font-size: 11px; padding: 6px;">
                 ZERAR TUDO
               </button>
             </div>
-            <button id="modal-btn-cancel-score" class="arcade-btn arcade-btn-dark" style="font-size: 9px;">
+            <button id="modal-btn-cancel-score" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 6px;">
               FECHAR
             </button>
           </div>
@@ -1167,26 +1171,26 @@ export class AdminPanel {
     if (!gift) return '';
 
     return `
-      <div class="arcade-modal-backdrop">
+      <div class="arcade-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-gift-title">
         <div class="arcade-modal-dialog">
-          <div class="font-pixel" style="font-size: 10px; color: var(--admin-primary); margin-bottom: 12px; border-bottom: 2px solid #000; padding-bottom: 6px;">
+          <div id="modal-gift-title" class="font-pixel" style="font-size: 13px; color: var(--admin-primary); margin-bottom: 14px; border-bottom: 2px solid #000; padding-bottom: 8px;">
             EDITAR PRESENTE: ${gift.name.toUpperCase()} (${gift.giftId})
           </div>
 
-          <form id="form-edit-gift" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
+          <form id="form-edit-gift" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px;">
             <div>
-              <label style="font-size: 10px; color: #9b8f79;">Nome:</label>
-              <input type="text" id="gift-edit-name" class="arcade-input" value="${gift.name}" />
+              <label for="gift-edit-name" style="font-size: 12px; color: var(--admin-outline); font-weight: bold; display: block; margin-bottom: 3px;">Nome:</label>
+              <input type="text" id="gift-edit-name" class="arcade-input" value="${gift.name}" style="font-size: 12px;" />
             </div>
 
             <div>
-              <label style="font-size: 10px; color: #9b8f79;">Custo em Diamantes:</label>
-              <input type="number" id="gift-edit-diamonds" class="arcade-input" value="${gift.diamondCost}" min="1" />
+              <label for="gift-edit-diamonds" style="font-size: 12px; color: var(--admin-outline); font-weight: bold; display: block; margin-bottom: 3px;">Custo em Diamantes:</label>
+              <input type="number" id="gift-edit-diamonds" class="arcade-input" value="${gift.diamondCost}" min="1" style="font-size: 12px;" />
             </div>
 
             <div>
-              <label style="font-size: 10px; color: #9b8f79;">Poder / Efeito:</label>
-              <select id="gift-edit-power" class="arcade-input">
+              <label for="gift-edit-power" style="font-size: 12px; color: var(--admin-outline); font-weight: bold; display: block; margin-bottom: 3px;">Poder / Efeito:</label>
+              <select id="gift-edit-power" class="arcade-input" style="font-size: 12px;">
                 <option value="impulse" ${gift.power === 'impulse' ? 'selected' : ''}>impulse (Aceleração rápida)</option>
                 <option value="slip" ${gift.power === 'slip' ? 'selected' : ''}>slip (Escorregão / Sabotagem)</option>
                 <option value="superStart" ${gift.power === 'superStart' ? 'selected' : ''}>superStart (Super arrancada)</option>
@@ -1196,18 +1200,18 @@ export class AdminPanel {
             </div>
 
             <div>
-              <label style="font-size: 10px; color: #9b8f79;">Candidato Beneficiado:</label>
-              <select id="gift-edit-candidate" class="arcade-input">
+              <label for="gift-edit-candidate" style="font-size: 12px; color: var(--admin-outline); font-weight: bold; display: block; margin-bottom: 3px;">Candidato Beneficiado:</label>
+              <select id="gift-edit-candidate" class="arcade-input" style="font-size: 12px;">
                 <option value="lula" ${gift.candidateBenefited === 'lula' ? 'selected' : ''}>Lula (13)</option>
                 <option value="flavio" ${gift.candidateBenefited === 'flavio' ? 'selected' : ''}>Flávio (22)</option>
               </select>
             </div>
 
-            <div style="display: flex; gap: 8px; margin-top: 8px;">
-              <button type="submit" class="arcade-btn arcade-btn-green" style="flex: 1; font-size: 9px;">
+            <div style="display: flex; gap: 8px; margin-top: 10px;">
+              <button type="submit" class="arcade-btn arcade-btn-green" style="flex: 1; font-size: 12px; padding: 8px;">
                 SALVAR
               </button>
-              <button type="button" id="btn-cancel-gift-modal" class="arcade-btn arcade-btn-dark" style="flex: 1; font-size: 9px;">
+              <button type="button" id="btn-cancel-gift-modal" class="arcade-btn arcade-btn-dark" style="flex: 1; font-size: 12px; padding: 8px;">
                 CANCELAR
               </button>
             </div>

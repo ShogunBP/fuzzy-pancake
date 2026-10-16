@@ -63,6 +63,7 @@ body.admin-body {
 /* Tipografia */
 .font-pixel {
   font-family: 'Press Start 2P', 'Courier New', monospace;
+  font-variant-numeric: tabular-nums;
 }
 .font-mono {
   font-family: 'Geist', monospace;
@@ -894,5 +895,22 @@ header.admin-header {
   padding: 2px 6px;
   font-family: 'Press Start 2P', monospace;
   font-size: 11px;
+}
+
+/* Acessibilidade: Respeito a prefers-reduced-motion (Vercel Guidelines) */
+@media (prefers-reduced-motion: reduce) {
+  .preview-runner-body.running,
+  .runner-aura-boost,
+  .preview-lane.flash-push,
+  .animate-arcade-blink,
+  .crt-overlay.active {
+    animation: none !important;
+  }
+  .pixel-progress-bar-red,
+  .pixel-progress-bar-blue,
+  .preview-runner-sprite,
+  .arcade-btn {
+    transition: none !important;
+  }
 }
 `;
