@@ -49,11 +49,15 @@ body.admin-body {
   --admin-surface-lowest: #0a0e18;
   --admin-primary: #ffd165;
   --admin-primary-dark: #eab308;
-  --admin-outline: #9b8f79;
-  --admin-outline-variant: #4f4633;
+  --admin-outline: #cbd5e1; /* Cinza claro com contraste alto >= 4.5:1 contra fundos escuros */
+  --admin-outline-muted: #94a3b8;
+  --admin-outline-variant: #475569;
   --admin-red: #ef4444;
+  --admin-red-bright: #f87171;
   --admin-blue: #3b82f6;
+  --admin-blue-bright: #60a5fa;
   --admin-green: #10b981;
+  --admin-green-bright: #34d399;
 }
 
 /* Tipografia */
@@ -84,7 +88,7 @@ body.admin-body {
 }
 .pixel-btn {
   position: relative;
-  transition: none;
+  transition: transform 0.05s ease, box-shadow 0.05s ease;
 }
 .pixel-btn:active {
   transform: translate(2px, 2px);
@@ -126,12 +130,18 @@ body.admin-body {
   justify-content: center;
   gap: 6px;
   transition: transform 0.05s ease, box-shadow 0.05s ease;
-  padding: 6px 12px;
+  padding: 8px 14px;
   text-transform: uppercase;
+  font-size: 12px;
+  line-height: 1.2;
 }
 .arcade-btn:active {
   transform: translate(2px, 2px);
   box-shadow: 0 0 0 0 #000000;
+}
+.arcade-btn:focus-visible {
+  outline: 2px solid var(--admin-primary);
+  outline-offset: 2px;
 }
 
 .arcade-btn-primary {
@@ -168,7 +178,7 @@ body.admin-body {
 
 .arcade-btn-dark {
   background: #262a35;
-  color: #dfe2f1;
+  color: #ffffff;
 }
 .arcade-btn-dark:hover {
   background: #313540;
@@ -193,12 +203,12 @@ body.admin-body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 8px 10px;
+  padding: 10px 12px;
   background: var(--admin-surface-high);
   border: 1px solid #000;
   color: var(--admin-primary);
   font-weight: 700;
-  font-size: 10px;
+  font-size: 12px;
   cursor: pointer;
   text-transform: uppercase;
   border-left: 3px solid var(--admin-primary);
@@ -206,14 +216,18 @@ body.admin-body {
 .accordion-header:hover {
   background: var(--admin-surface-highest);
 }
+.accordion-header:focus-visible {
+  outline: 2px solid var(--admin-primary);
+  outline-offset: 2px;
+}
 .accordion-body {
   background: var(--admin-surface-lowest);
   border: 1px solid #000;
   border-top: none;
-  padding: 8px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 .accordion-body.collapsed {
   display: none;
@@ -226,23 +240,23 @@ body.admin-body {
   padding: 2px;
   border: 2px solid #000000;
   box-shadow: inset 1px 1px 0 #000000;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 .pixel-progress-track {
   width: 100%;
-  height: 12px;
+  height: 14px;
   background: #0f131d;
   overflow: hidden;
   display: flex;
 }
 .pixel-progress-bar-red {
   height: 100%;
-  background: linear-gradient(90deg, #991b1b 0%, #ef4444 60%, #ffd165 100%);
+  background: linear-gradient(90deg, #b91c1c 0%, #ef4444 60%, #ffd165 100%);
   transition: width 0.1s linear;
 }
 .pixel-progress-bar-blue {
   height: 100%;
-  background: linear-gradient(90deg, #1e40af 0%, #3b82f6 60%, #ffd165 100%);
+  background: linear-gradient(90deg, #1d4ed8 0%, #3b82f6 60%, #ffd165 100%);
   transition: width 0.1s linear;
 }
 
@@ -265,7 +279,7 @@ header.admin-header {
   gap: 12px;
   box-shadow: 0 3px 0 0 #000000;
   z-index: 50;
-  flex-wrap: wrap;
+  flex-shrink: 0;
 }
 
 .admin-header-title {
@@ -274,8 +288,8 @@ header.admin-header {
   gap: 10px;
 }
 .admin-badge-icon {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   background: var(--admin-primary);
   color: #000000;
   display: flex;
@@ -283,17 +297,19 @@ header.admin-header {
   justify-content: center;
   border: 2px solid #000000;
   font-weight: bold;
+  font-size: 16px;
 }
 
 .admin-workspace {
   display: flex;
   flex: 1;
   overflow: hidden;
+  min-height: 0;
 }
 
 /* Colunas */
 .admin-col-left {
-  width: 310px;
+  width: 320px;
   flex-shrink: 0;
   border-right: 2px solid #000000;
   box-shadow: 3px 0 0 0 #000000;
@@ -309,15 +325,15 @@ header.admin-header {
 .admin-col-center {
   flex: 1;
   padding: 12px;
-  overflow-y: auto;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
 }
 
 .admin-col-right {
-  width: 330px;
+  width: 340px;
   flex-shrink: 0;
   border-left: 2px solid #000000;
   box-shadow: -3px 0 0 0 #000000;
@@ -330,7 +346,31 @@ header.admin-header {
   z-index: 20;
 }
 
-/* Preview 9:16 Arena */
+/* Centro: Contêiner de Pré-visualização & Slot de Abas */
+.admin-center-stage {
+  display: flex;
+  flex: 1;
+  gap: 12px;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Slot de Pré-visualização com suporte a proporção (9:16 ou futuro 16:9) */
+.preview-stage-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  height: 100%;
+}
+.preview-stage-column[data-aspect="9:16"] {
+  width: 360px;
+}
+.preview-stage-column[data-aspect="16:9"] {
+  width: 640px;
+}
+
 .arena-preview-container {
   display: flex;
   flex-direction: column;
@@ -339,14 +379,18 @@ header.admin-header {
   background: #000000;
   border: 3px solid #000000;
   box-shadow: 4px 4px 0 0 #000000;
-  padding: 8px;
+  padding: 6px;
   position: relative;
-  flex-shrink: 0;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
 }
 
 .preview-aspect-box {
-  width: 220px;
-  height: 391px; /* Proporção 9:16 exata */
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  aspect-ratio: 9 / 16;
   background: #0f1423;
   border: 2px solid var(--admin-primary);
   position: relative;
@@ -359,7 +403,7 @@ header.admin-header {
 /* Topo do estádio 9:16 (Refletores e Jumbotron) */
 .preview-stadium-top {
   background: linear-gradient(180deg, #11192e 0%, #0d1424 100%);
-  padding: 6px 8px;
+  padding: 6px 10px;
   border-bottom: 2px solid #000;
   display: flex;
   flex-direction: column;
@@ -371,28 +415,28 @@ header.admin-header {
   align-items: center;
 }
 .preview-floodlight {
-  width: 28px;
-  height: 7px;
+  width: 32px;
+  height: 8px;
   background: #fef08a;
   border: 1px solid #000;
   box-shadow: 0 0 8px #fde047;
 }
 .preview-jumbotron {
   background: #000;
-  border: 1px solid rgba(234, 179, 8, 0.4);
+  border: 1px solid rgba(234, 179, 8, 0.6);
   text-align: center;
-  padding: 2px 4px;
+  padding: 4px 6px;
 }
 
 /* Régua de Distância 9:16 */
 .preview-ruler {
   display: flex;
   justify-content: space-between;
-  padding: 2px 6px;
-  background: rgba(0, 0, 0, 0.7);
+  padding: 3px 8px;
+  background: rgba(0, 0, 0, 0.85);
   border-bottom: 1px solid #1c1f2a;
-  font-size: 7px;
-  color: #94a3b8;
+  font-size: 11px;
+  color: #cbd5e1;
 }
 
 /* Faixas 9:16 dos corredores */
@@ -409,7 +453,7 @@ header.admin-header {
   position: relative;
   display: flex;
   align-items: center;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.25);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.35);
   overflow: hidden;
 }
 .preview-lane:last-child {
@@ -434,14 +478,14 @@ header.admin-header {
 /* Linha de Chegada Quadriculada */
 .checkered-finish-line {
   position: absolute;
-  right: 8px;
+  right: 10px;
   top: 0;
   bottom: 0;
-  width: 10px;
-  background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 50% / 6px 6px;
-  border-left: 1px solid #000;
-  border-right: 1px solid #000;
-  opacity: 0.85;
+  width: 14px;
+  background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 50% / 7px 7px;
+  border-left: 2px solid #000;
+  border-right: 2px solid #000;
+  opacity: 0.9;
   z-index: 5;
 }
 
@@ -457,17 +501,17 @@ header.admin-header {
   z-index: 10;
 }
 .preview-runner-badge {
-  font-size: 7px;
+  font-size: 11px;
   font-weight: bold;
-  padding: 1px 3px;
+  padding: 1px 4px;
   border: 1px solid #000;
   box-shadow: 1px 1px 0 #000;
   margin-bottom: 1px;
 }
 .preview-runner-body {
-  width: 18px;
-  height: 22px;
-  border: 1.5px solid #000000;
+  width: 22px;
+  height: 26px;
+  border: 2px solid #000000;
   box-shadow: 1px 1px 0 #000;
   display: flex;
   align-items: center;
@@ -479,72 +523,112 @@ header.admin-header {
 }
 @keyframes runner-bob {
   0% { transform: translateY(0); }
-  100% { transform: translateY(-2px); }
+  100% { transform: translateY(-3px); }
 }
 
 /* Aura de Poder no Corredor */
 .runner-aura-boost {
   position: absolute;
-  inset: -3px;
-  border: 1.5px solid #facc15;
-  box-shadow: 0 0 6px #facc15;
+  inset: -4px;
+  border: 2px solid #facc15;
+  box-shadow: 0 0 8px #facc15;
   animation: pulse-aura 0.6s infinite alternate;
 }
 .runner-aura-slip {
   position: absolute;
-  inset: -3px;
-  border: 1.5px solid #ef4444;
-  box-shadow: 0 0 6px #ef4444;
+  inset: -4px;
+  border: 2px solid #ef4444;
+  box-shadow: 0 0 8px #ef4444;
 }
 .runner-aura-shield {
   position: absolute;
-  inset: -4px;
+  inset: -5px;
   border-radius: 50%;
-  border: 2px solid #38bdf8;
-  box-shadow: 0 0 8px #38bdf8;
+  border: 2.5px solid #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
 }
 @keyframes pulse-aura {
   0% { opacity: 0.5; }
   100% { opacity: 1; }
 }
 
-/* Telemetria Cards */
-.telemetry-card {
-  padding: 8px;
+/* Cartões Compactos de Candidatos abaixo do preview */
+.preview-candidates-deck {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.candidate-compact-card {
+  padding: 8px 10px;
+  background: var(--admin-surface-low);
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0 0 #000;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.candidate-compact-card.card-lula {
+  border-left: 4px solid #ef4444;
+}
+.candidate-compact-card.card-flavio {
+  border-left: 4px solid #3b82f6;
+}
+
+/* Painel de Abas Lateral ao Preview */
+.admin-tabbed-monitor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--admin-surface-low);
+  border: 2px solid #000000;
+  box-shadow: 3px 3px 0 0 #000000;
 }
 
 /* Tabelas e log retro */
 .arcade-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 11px;
+  font-size: 12px;
 }
 .arcade-table th {
-  padding: 6px 8px;
+  padding: 8px 10px;
   text-align: left;
   background: #000000;
   color: var(--admin-outline);
-  font-size: 9px;
-  border-bottom: 1px solid #262a35;
+  font-size: 11px;
+  font-weight: 700;
+  border-bottom: 2px solid #262a35;
+  letter-spacing: 0.05em;
 }
 .arcade-table td {
-  padding: 6px 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  vertical-align: middle;
 }
 
 /* Filtros do Log */
 .log-filter-btn {
   background: #262a35;
-  color: #9b8f79;
+  color: #cbd5e1;
   border: 1px solid #000;
-  padding: 3px 8px;
+  padding: 5px 10px;
   cursor: pointer;
-  font-size: 9px;
-  font-weight: bold;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 .log-filter-btn:hover {
   background: #313540;
   color: #fff;
+}
+.log-filter-btn:focus-visible {
+  outline: 2px solid var(--admin-primary);
+  outline-offset: 1px;
 }
 .log-filter-btn.active {
   background: var(--admin-primary);
@@ -557,45 +641,53 @@ header.admin-header {
 .tab-btn {
   background: transparent;
   border: none;
-  border-bottom: 2px solid transparent;
-  color: #9b8f79;
-  font-weight: bold;
-  padding: 6px 10px;
+  border-bottom: 3px solid transparent;
+  color: #94a3b8;
+  font-weight: 700;
+  padding: 10px 14px;
   cursor: pointer;
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
-  transition: all 0.1s ease;
+  transition: color 0.1s ease, background 0.1s ease;
+  white-space: nowrap;
 }
 .tab-btn:hover {
-  color: #dfe2f1;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.03);
+}
+.tab-btn:focus-visible {
+  outline: 2px solid var(--admin-primary);
+  outline-offset: -2px;
 }
 .tab-btn.active {
   color: var(--admin-primary);
   border-bottom-color: var(--admin-primary);
-  background: rgba(255, 209, 101, 0.05);
+  background: rgba(255, 209, 101, 0.08);
 }
 
 /* Sliders e Inputs */
 .arcade-input {
   background: #0a0e18;
-  border: 1px solid #262a35;
+  border: 1px solid #334155;
   color: #ffffff;
-  padding: 5px 8px;
-  font-size: 12px;
+  padding: 8px 10px;
+  font-size: 13px;
   width: 100%;
   border-radius: 0;
+  font-family: inherit;
 }
 .arcade-input:focus {
-  outline: none;
+  outline: 2px solid var(--admin-primary);
+  outline-offset: 1px;
   border-color: var(--admin-primary);
 }
 
 /* Presets de Prova */
 .preset-btn {
-  padding: 4px 6px;
+  padding: 6px 8px;
   border: 1px solid #000;
   box-shadow: 1px 1px 0 #000;
-  font-size: 9px;
+  font-size: 11px;
   cursor: pointer;
   background: #262a35;
   color: #dfe2f1;
@@ -719,8 +811,8 @@ header.admin-header {
   background: #052e16;
   color: #34d399;
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
-  padding: 1px 4px;
+  font-size: 11px;
+  padding: 2px 6px;
   border: 1px solid #15803d;
   text-transform: uppercase;
 }
@@ -728,8 +820,8 @@ header.admin-header {
   background: #450a0a;
   color: #f87171;
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
-  padding: 1px 4px;
+  font-size: 11px;
+  padding: 2px 6px;
   border: 1px solid #b91c1c;
   text-transform: uppercase;
 }
@@ -737,16 +829,16 @@ header.admin-header {
   background: #422006;
   color: #facc15;
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
-  padding: 1px 4px;
+  font-size: 11px;
+  padding: 2px 6px;
   border: 1px solid #ca8a04;
   text-transform: uppercase;
 }
 
 /* LED Indicators for Spam Toggles */
 .led-indicator {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border: 1px solid #000000;
   background: #475569;
   display: inline-block;
@@ -764,43 +856,43 @@ header.admin-header {
 .log-counter-pill {
   background: #000000;
   border: 1px solid var(--admin-outline-variant);
-  padding: 3px 8px;
+  padding: 5px 10px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
+  font-size: 11px;
   display: inline-flex;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
 }
 .log-badge-gift {
   background: #450a0a;
   color: #f87171;
   border: 1px solid #991b1b;
-  padding: 1px 4px;
+  padding: 2px 6px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
+  font-size: 11px;
 }
 .log-badge-chat {
   background: #172554;
   color: #60a5fa;
   border: 1px solid #1e40af;
-  padding: 1px 4px;
+  padding: 2px 6px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
+  font-size: 11px;
 }
 .log-badge-spam {
   background: #1e293b;
   color: #cbd5e1;
   border: 1px solid #475569;
-  padding: 1px 4px;
+  padding: 2px 6px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
+  font-size: 11px;
 }
 .log-badge-system {
   background: #422006;
   color: #facc15;
   border: 1px solid #ca8a04;
-  padding: 1px 4px;
+  padding: 2px 6px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
+  font-size: 11px;
 }
 `;

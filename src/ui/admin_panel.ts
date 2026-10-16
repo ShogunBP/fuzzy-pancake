@@ -177,16 +177,16 @@ export class AdminPanel {
           <div class="admin-header-title">
             <div class="admin-badge-icon">★</div>
             <div>
-              <div class="font-pixel" style="font-size: 11px; color: var(--admin-primary); display: flex; align-items: center; gap: 6px;">
+              <div class="font-pixel" style="font-size: 14px; color: var(--admin-primary); display: flex; align-items: center; gap: 8px;">
                 PRESIDENTIAL SPRINT '26
-                <span class="font-pixel" style="font-size: 8px; background: #064e3b; color: #34d399; padding: 2px 4px; border: 1px solid #059669;">
+                <span class="font-pixel" style="font-size: 11px; background: #064e3b; color: #34d399; padding: 2px 6px; border: 1px solid #059669;">
                   OPERADOR
                 </span>
               </div>
-              <div style="font-size: 9px; color: var(--admin-outline); display: flex; gap: 6px; align-items: center; margin-top: 2px;">
+              <div style="font-size: 11px; color: var(--admin-outline); display: flex; gap: 8px; align-items: center; margin-top: 2px;">
                 <span>ARCADE TELEMETRY ARENA</span>
-                <span style="display: inline-flex; align-items: center; gap: 3px; color: #22c55e; font-size: 8px;" class="font-pixel">
-                  <span style="width: 5px; height: 5px; background: #22c55e; border-radius: 50%; display: inline-block;"></span>
+                <span style="display: inline-flex; align-items: center; gap: 4px; color: #22c55e; font-size: 11px;" class="font-pixel">
+                  <span style="width: 6px; height: 6px; background: #22c55e; border-radius: 50%; display: inline-block;"></span>
                   60 FPS
                 </span>
               </div>
@@ -194,59 +194,59 @@ export class AdminPanel {
           </div>
 
           <!-- PLACAR CENTRAL: LULA vs FLÁVIO COM AJUSTE RÁPIDO -->
-          <div class="arcade-panel" style="display: flex; align-items: center; padding: 4px 10px; gap: 8px; background: #000; border: 2px solid #000; box-shadow: 2px 2px 0 0 #000;">
+          <div class="arcade-panel" style="display: flex; align-items: center; padding: 6px 12px; gap: 10px; background: #000; border: 2px solid #000; box-shadow: 2px 2px 0 0 #000;">
             <!-- Lula 13 -->
-            <div style="display: flex; align-items: center; gap: 5px;">
-              <span class="font-pixel" style="font-size: 9px; background: #dc2626; color: #fff; padding: 2px 4px; border: 1px solid #000; box-shadow: 1px 1px 0 #000;">13</span>
-              <span class="font-pixel" style="font-size: 9px; color: #ef4444;" id="header-cand-name-lula">${candidates.lula.name.toUpperCase()}:</span>
-              <span id="admin-score-lula" class="font-pixel" style="font-size: 12px; color: #fff;">${scores.session.lula}</span>
-              <span style="font-size: 10px; color: #ffd165;">★</span>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span class="font-pixel" style="font-size: 11px; background: #dc2626; color: #fff; padding: 2px 5px; border: 1px solid #000; box-shadow: 1px 1px 0 #000;">13</span>
+              <span class="font-pixel" style="font-size: 12px; color: #f87171;" id="header-cand-name-lula">${candidates.lula.name.toUpperCase()}:</span>
+              <span id="admin-score-lula" class="font-pixel" style="font-size: 16px; color: #fff;">${scores.session.lula}</span>
+              <span style="font-size: 14px; color: #ffd165;">★</span>
               <div style="display: flex; flex-direction: column; gap: 1px;">
-                <button id="btn-score-lula-inc" class="arcade-btn arcade-btn-dark" style="font-size: 7px; padding: 1px 3px;" title="+1 Vitória Lula">▲</button>
-                <button id="btn-score-lula-dec" class="arcade-btn arcade-btn-dark" style="font-size: 7px; padding: 1px 3px;" title="-1 Vitória Lula">▼</button>
+                <button id="btn-score-lula-inc" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 1px 4px; line-height: 1;" title="+1 Vitória Lula" aria-label="Incrementar vitórias Lula">▲</button>
+                <button id="btn-score-lula-dec" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 1px 4px; line-height: 1;" title="-1 Vitória Lula" aria-label="Decrementar vitórias Lula">▼</button>
               </div>
             </div>
 
-            <div class="font-pixel" style="font-size: 10px; color: #ffd165; padding: 0 4px;">VS</div>
+            <div class="font-pixel" style="font-size: 12px; color: #ffd165; padding: 0 4px;">VS</div>
 
             <!-- Flávio 22 -->
-            <div style="display: flex; align-items: center; gap: 5px;">
+            <div style="display: flex; align-items: center; gap: 6px;">
               <div style="display: flex; flex-direction: column; gap: 1px;">
-                <button id="btn-score-flavio-inc" class="arcade-btn arcade-btn-dark" style="font-size: 7px; padding: 1px 3px;" title="+1 Vitória Flávio">▲</button>
-                <button id="btn-score-flavio-dec" class="arcade-btn arcade-btn-dark" style="font-size: 7px; padding: 1px 3px;" title="-1 Vitória Flávio">▼</button>
+                <button id="btn-score-flavio-inc" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 1px 4px; line-height: 1;" title="+1 Vitória Flávio" aria-label="Incrementar vitórias Flávio">▲</button>
+                <button id="btn-score-flavio-dec" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 1px 4px; line-height: 1;" title="-1 Vitória Flávio" aria-label="Decrementar vitórias Flávio">▼</button>
               </div>
-              <span style="font-size: 10px; color: #ffd165;">★</span>
-              <span id="admin-score-flavio" class="font-pixel" style="font-size: 12px; color: #fff;">${scores.session.flavio}</span>
-              <span class="font-pixel" style="font-size: 9px; color: #3b82f6;" id="header-cand-name-flavio">:${candidates.flavio.name.toUpperCase()}</span>
-              <span class="font-pixel" style="font-size: 9px; background: #2563eb; color: #fff; padding: 2px 4px; border: 1px solid #000; box-shadow: 1px 1px 0 #000;">22</span>
+              <span style="font-size: 14px; color: #ffd165;">★</span>
+              <span id="admin-score-flavio" class="font-pixel" style="font-size: 16px; color: #fff;">${scores.session.flavio}</span>
+              <span class="font-pixel" style="font-size: 12px; color: #60a5fa;" id="header-cand-name-flavio">:${candidates.flavio.name.toUpperCase()}</span>
+              <span class="font-pixel" style="font-size: 11px; background: #2563eb; color: #fff; padding: 2px 5px; border: 1px solid #000; box-shadow: 1px 1px 0 #000;">22</span>
             </div>
 
             <!-- Cronômetro Digital -->
-            <div style="margin-left: 4px; background: #000; border: 1px solid rgba(234, 179, 8, 0.4); padding: 3px 6px; color: #facc15; box-shadow: inset 0 0 6px rgba(0,0,0,0.8);" class="font-pixel">
-              ⏱ <span id="admin-main-timer" style="font-size: 11px;">00:00.00</span>
+            <div style="margin-left: 6px; background: #000; border: 1px solid rgba(234, 179, 8, 0.5); padding: 4px 8px; color: #ffd165; box-shadow: inset 0 0 6px rgba(0,0,0,0.8);" class="font-pixel">
+              ⏱ <span id="admin-main-timer" style="font-size: 16px;">00:00.00</span>
             </div>
 
             <!-- Botão Zerar/Ajustar Placar -->
-            <button id="admin-btn-open-score-modal" class="arcade-btn arcade-btn-dark" style="font-size: 8px; padding: 3px 6px;" title="Zerar ou Ajustar Placar">
+            <button id="admin-btn-open-score-modal" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 4px 8px;" title="Zerar ou Ajustar Placar">
               ↺ Placar
             </button>
           </div>
 
           <!-- CONTROLES DA CORRIDA E SAÍDA -->
           <div style="display: flex; gap: 6px; align-items: center;">
-            <button id="admin-btn-start" class="arcade-btn arcade-btn-green" style="font-size: 10px;">
+            <button id="admin-btn-start" class="arcade-btn arcade-btn-green" style="font-size: 12px;">
               ▶ INICIAR
             </button>
-            <button id="admin-btn-pause" class="arcade-btn arcade-btn-amber" style="font-size: 10px;">
+            <button id="admin-btn-pause" class="arcade-btn arcade-btn-amber" style="font-size: 12px;">
               ⏸ PAUSAR
             </button>
-            <button id="admin-btn-reset" class="arcade-btn arcade-btn-dark" style="font-size: 10px;" title="Reiniciar Pista">
+            <button id="admin-btn-reset" class="arcade-btn arcade-btn-dark" style="font-size: 12px;" title="Reiniciar Pista">
               ↺ REINICIAR
             </button>
-            <button id="admin-btn-toggle-crt" class="arcade-btn arcade-btn-dark" style="font-size: 10px;" title="Alternar Filtro CRT">
+            <button id="admin-btn-toggle-crt" class="arcade-btn arcade-btn-dark" style="font-size: 12px;" title="Alternar Filtro CRT">
               📺 CRT
             </button>
-            <button id="admin-btn-logout" class="arcade-btn arcade-btn-dark" style="font-size: 10px;" title="Bloquear / Sair">
+            <button id="admin-btn-logout" class="arcade-btn arcade-btn-dark" style="font-size: 12px;" title="Bloquear / Sair">
               🔒 SAIR
             </button>
           </div>
@@ -259,57 +259,57 @@ export class AdminPanel {
           <!-- ========================================== -->
           <aside class="admin-col-left">
             <!-- CONEXÃO DA LIVE DO TIKTOK -->
-            <div class="arcade-panel" style="padding: 10px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                <span class="font-pixel" style="font-size: 8px; color: var(--admin-primary);">CONEXÃO DA LIVE</span>
-                <span id="admin-live-badge" class="font-pixel" style="font-size: 8px; padding: 2px 6px; background: #064e3b; color: #34d399; border: 1px solid #059669;">
+            <div class="arcade-panel" style="padding: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span class="font-pixel" style="font-size: 11px; color: var(--admin-primary);">CONEXÃO DA LIVE</span>
+                <span id="admin-live-badge" class="font-pixel" style="font-size: 11px; padding: 3px 8px; background: #064e3b; color: #34d399; border: 1px solid #059669;">
                   ${liveStatus.state.toUpperCase()}
                 </span>
               </div>
-              <div style="font-size: 11px; color: #9b8f79; line-height: 1.5;" class="font-mono">
+              <div style="font-size: 12px; color: var(--admin-outline); line-height: 1.6;" class="font-mono">
                 <div>Canal: <strong style="color: #fff;">${liveStatus.channelName}</strong></div>
                 <div>Tempo Conectado: <span id="admin-live-duration" style="color: #fff;">0m 00s</span></div>
-                <div>Reconexões: <span id="admin-live-reconnects" style="color: #facc15;">${liveStatus.reconnectCount}</span></div>
-                <div id="admin-live-error-row" style="color: #ef4444; font-size: 9px; display: ${liveStatus.lastError ? 'block' : 'none'};">
+                <div>Reconexões: <span id="admin-live-reconnects" style="color: #ffd165;">${liveStatus.reconnectCount}</span></div>
+                <div id="admin-live-error-row" style="color: #f87171; font-size: 11px; display: ${liveStatus.lastError ? 'block' : 'none'};">
                   Erro: <span id="admin-live-error">${liveStatus.lastError || ''}</span>
                 </div>
               </div>
-              <div style="display: flex; gap: 6px; margin-top: 8px;">
-                <button id="admin-btn-reconnect" class="arcade-btn arcade-btn-dark" style="font-size: 9px; flex: 1; padding: 4px;">
+              <div style="display: flex; gap: 8px; margin-top: 10px;">
+                <button id="admin-btn-reconnect" class="arcade-btn arcade-btn-dark" style="font-size: 11px; flex: 1; padding: 6px;">
                   Reconectar
                 </button>
-                <button id="admin-btn-disconnect" class="arcade-btn arcade-btn-dark" style="font-size: 9px; flex: 1; padding: 4px;">
+                <button id="admin-btn-disconnect" class="arcade-btn arcade-btn-dark" style="font-size: 11px; flex: 1; padding: 6px;">
                   Derrubar
                 </button>
               </div>
             </div>
 
             <!-- CONTROLES DE AUDIÊNCIA (CHAT 13 / 22) -->
-            <div class="arcade-panel" style="padding: 10px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid #000; padding-bottom: 4px;">
-                <span class="font-pixel" style="font-size: 8px; color: var(--admin-primary);">CONTROLES & AUDIÊNCIA</span>
-                <span class="font-mono" style="font-size: 9px; color: var(--admin-outline); background: #000; padding: 1px 4px; border: 1px solid #262a35;">
+            <div class="arcade-panel" style="padding: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #000; padding-bottom: 6px;">
+                <span class="font-pixel" style="font-size: 11px; color: var(--admin-primary);">CONTROLES & AUDIÊNCIA</span>
+                <span class="font-mono" style="font-size: 11px; color: var(--admin-outline); background: #000; padding: 2px 6px; border: 1px solid #262a35;">
                   CHAT COLETIVO
                 </span>
               </div>
-              <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="display: flex; flex-direction: column; gap: 10px;">
                 <!-- Lula 13 Push & Spam -->
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <button id="admin-btn-chat-13" class="arcade-btn arcade-btn-danger" style="font-size: 10px; width: 100%;">
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                  <button id="admin-btn-chat-13" class="arcade-btn arcade-btn-danger" style="font-size: 12px; width: 100%;">
                     +1 MSG LULA (13)
                   </button>
-                  <button id="admin-btn-spam-lula" class="arcade-btn arcade-btn-dark" style="font-size: 8px; width: 100%; justify-content: space-between; padding: 4px 6px;">
+                  <button id="admin-btn-spam-lula" class="arcade-btn arcade-btn-dark" style="font-size: 11px; width: 100%; justify-content: space-between; padding: 6px 10px;">
                     <span>SPAM AUTO (10/s)</span>
                     <span id="admin-led-spam-lula" class="led-indicator ${this.spamLulaInterval ? 'active-red' : ''}"></span>
                   </button>
                 </div>
 
                 <!-- Flávio 22 Push & Spam -->
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <button id="admin-btn-chat-22" class="arcade-btn arcade-btn-primary" style="font-size: 10px; width: 100%; background: #2563eb; color: #fff;">
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                  <button id="admin-btn-chat-22" class="arcade-btn arcade-btn-primary" style="font-size: 12px; width: 100%; background: #2563eb; color: #fff;">
                     +1 MSG FLÁVIO (22)
                   </button>
-                  <button id="admin-btn-spam-flavio" class="arcade-btn arcade-btn-dark" style="font-size: 8px; width: 100%; justify-content: space-between; padding: 4px 6px;">
+                  <button id="admin-btn-spam-flavio" class="arcade-btn arcade-btn-dark" style="font-size: 11px; width: 100%; justify-content: space-between; padding: 6px 10px;">
                     <span>SPAM AUTO (10/s)</span>
                     <span id="admin-led-spam-flavio" class="led-indicator ${this.spamFlavioInterval ? 'active-green' : ''}"></span>
                   </button>
@@ -318,10 +318,10 @@ export class AdminPanel {
             </div>
 
             <!-- PODERES & PRESENTES RÁPIDOS -->
-            <div class="arcade-panel" style="padding: 10px; flex: 1; display: flex; flex-direction: column;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid #000; padding-bottom: 4px;">
-                <span class="font-pixel" style="font-size: 8px; color: var(--admin-primary);">PODERES & PRESENTES</span>
-                <span style="font-size: 8px; color: var(--admin-outline);" class="font-mono">TIKTOK LIVE</span>
+            <div class="arcade-panel" style="padding: 12px; flex: 1; display: flex; flex-direction: column; min-height: 0;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid #000; padding-bottom: 6px;">
+                <span class="font-pixel" style="font-size: 11px; color: var(--admin-primary);">PODERES & PRESENTES</span>
+                <span style="font-size: 11px; color: var(--admin-outline);" class="font-mono">TIKTOK LIVE</span>
               </div>
               <div id="admin-gifts-quick-list" style="display: flex; flex-direction: column; gap: 6px; overflow-y: auto; flex: 1;">
                 ${this.renderQuickGiftsHtml()}
@@ -334,175 +334,178 @@ export class AdminPanel {
           <!-- ========================================== -->
           <main class="admin-col-center">
             <!-- STATUS DA ARENA & METAS -->
-            <div class="arcade-panel" style="padding: 6px 12px; display: flex; justify-content: space-between; align-items: center;">
-              <div style="display: flex; gap: 8px; align-items: center;">
-                <span class="font-pixel" style="font-size: 8px; color: var(--admin-outline);">ESTADO:</span>
-                <span id="admin-race-status-badge" class="font-pixel" style="font-size: 8px; padding: 2px 6px; background: #78350f; color: #fbbf24; border: 1px solid #d97706;">
+            <div class="arcade-panel" style="padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;">
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <span class="font-pixel" style="font-size: 11px; color: var(--admin-outline);">ESTADO:</span>
+                <span id="admin-race-status-badge" class="font-pixel" style="font-size: 11px; padding: 3px 8px; background: #78350f; color: #ffd165; border: 1px solid #d97706;">
                   AGUARDANDO SINAL
                 </span>
-                <span id="admin-auto-badge" class="font-pixel" style="font-size: 8px; padding: 2px 4px; background: #1e1b4b; color: #818cf8; display: none;">
+                <span id="admin-auto-badge" class="font-pixel" style="font-size: 11px; padding: 3px 6px; background: #1e1b4b; color: #818cf8; display: none;">
                   AUTO RACING
                 </span>
               </div>
-              <div class="font-mono" style="font-size: 10px; color: var(--admin-outline); display: flex; gap: 8px;">
+              <div class="font-mono" style="font-size: 12px; color: var(--admin-outline); display: flex; gap: 12px;">
                 <span>CIRCUITO: <strong style="color: #fff;">ESTÁDIO NACIONAL</strong></span>
                 <span>PISTA: <strong id="admin-track-length-display" style="color: #fff;">100m</strong></span>
-                <span>DURAÇÃO: <strong id="admin-target-duration-display" style="color: #facc15;">180s</strong></span>
+                <span>DURAÇÃO: <strong id="admin-target-duration-display" style="color: #ffd165;">180s</strong></span>
               </div>
             </div>
 
-            <!-- CONTAINER CENTRAL: PRÉVIA 9:16 ESTÁDIO + TELEMETRIA -->
-            <div style="display: flex; gap: 12px; align-items: stretch;">
-              <!-- PREVIEW 9:16 ARENA (REQUISITO: PROPORÇÃO EXATA 9:16) -->
-              <div class="arena-preview-container">
-                <div style="font-size: 8px; color: var(--admin-primary); margin-bottom: 4px;" class="font-pixel">
-                  ★ TRANSMISSÃO 9:16 ★
-                </div>
-                <div class="preview-aspect-box">
-                  <!-- TOPO ESTÁDIO COM REFLETORES -->
-                  <div class="preview-stadium-top">
-                    <div class="preview-floodlights-mast">
-                      <div class="preview-floodlight"></div>
-                      <div class="preview-floodlight"></div>
-                    </div>
-                    <div class="preview-jumbotron font-pixel" style="font-size: 7px; color: #ffd165;">
-                      GRANDE PRÊMIO BRASÍLIA
-                    </div>
+            <!-- NOVO PALCO CENTRAL: QUADRO 9:16 COM CARDS EMBAIXO + MONITOR LATERAL COM ABAS -->
+            <div class="admin-center-stage">
+              <!-- SLOT DE PRÉ-VISUALIZAÇÃO (PREPARADO PARA 9:16 E FUTURO 16:9) -->
+              <div class="preview-stage-column" id="preview-stage-slot" data-aspect="9:16">
+                <!-- QUADRO 9:16 GRANDE QUASE TELA CHEIA VERTICAL -->
+                <div class="arena-preview-container">
+                  <div style="font-size: 11px; color: var(--admin-primary); margin-bottom: 4px;" class="font-pixel">
+                    ★ TRANSMISSÃO 9:16 ★
                   </div>
-
-                  <!-- RÉGUA DE DISTÂNCIA 100M -->
-                  <div class="preview-ruler font-pixel">
-                    <span>0m</span>
-                    <span>25m</span>
-                    <span>50m</span>
-                    <span>75m</span>
-                    <span>100m</span>
-                  </div>
-
-                  <!-- ÁREA DAS FAIXAS DE CORRIDA COM LINHA DE CHEGADA -->
-                  <div class="preview-track-area">
-                    <div class="checkered-finish-line" title="Linha de Chegada"></div>
-
-                    <!-- FAIXA 1: LULA (13) -->
-                    <div class="preview-lane preview-lane-lula" id="lane-preview-lula">
-                      <div class="font-pixel" style="position: absolute; left: 6px; font-size: 7px; color: rgba(255,255,255,0.3); pointer-events: none;">
-                        13 LULA
+                  <div class="preview-aspect-box">
+                    <!-- TOPO ESTÁDIO COM REFLETORES -->
+                    <div class="preview-stadium-top">
+                      <div class="preview-floodlights-mast">
+                        <div class="preview-floodlight"></div>
+                        <div class="preview-floodlight"></div>
                       </div>
-                      <div class="preview-runner-sprite" id="admin-preview-runner-lula" style="left: 4px;">
-                        <div class="preview-runner-badge font-pixel" style="background: #dc2626; color: #fff;">13</div>
-                        <div class="preview-runner-body" id="admin-runner-body-lula" style="background: #ef4444;">
-                          <div id="aura-lula"></div>
+                      <div class="preview-jumbotron font-pixel" style="font-size: 11px; color: #ffd165;">
+                        GRANDE PRÊMIO BRASÍLIA
+                      </div>
+                    </div>
+
+                    <!-- RÉGUA DE DISTÂNCIA 100M -->
+                    <div class="preview-ruler font-pixel">
+                      <span>0m</span>
+                      <span>25m</span>
+                      <span>50m</span>
+                      <span>75m</span>
+                      <span>100m</span>
+                    </div>
+
+                    <!-- ÁREA DAS FAIXAS DE CORRIDA COM LINHA DE CHEGADA -->
+                    <div class="preview-track-area">
+                      <div class="checkered-finish-line" title="Linha de Chegada"></div>
+
+                      <!-- FAIXA 1: LULA (13) -->
+                      <div class="preview-lane preview-lane-lula" id="lane-preview-lula">
+                        <div class="font-pixel" style="position: absolute; right: 28px; top: 8px; font-size: 13px; color: rgba(255,255,255,0.7); pointer-events: none; letter-spacing: 1px;">
+                          13 LULA
+                        </div>
+                        <div class="preview-runner-sprite" id="admin-preview-runner-lula" style="left: 4px;">
+                          <div class="preview-runner-badge font-pixel" style="background: #dc2626; color: #fff; font-size: 11px;">13</div>
+                          <div class="preview-runner-body" id="admin-runner-body-lula" style="background: #ef4444; width: 26px; height: 32px;">
+                            <div id="aura-lula"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- FAIXA 2: FLÁVIO (22) -->
+                      <div class="preview-lane preview-lane-flavio" id="lane-preview-flavio">
+                        <div class="font-pixel" style="position: absolute; right: 28px; top: 8px; font-size: 13px; color: rgba(255,255,255,0.7); pointer-events: none; letter-spacing: 1px;">
+                          22 FLÁVIO
+                        </div>
+                        <div class="preview-runner-sprite" id="admin-preview-runner-flavio" style="left: 4px;">
+                          <div class="preview-runner-badge font-pixel" style="background: #2563eb; color: #fff; font-size: 11px;">22</div>
+                          <div class="preview-runner-body" id="admin-runner-body-flavio" style="background: #3b82f6; width: 26px; height: 32px;">
+                            <div id="aura-flavio"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
 
-                    <!-- FAIXA 2: FLÁVIO (22) -->
-                    <div class="preview-lane preview-lane-flavio" id="lane-preview-flavio">
-                      <div class="font-pixel" style="position: absolute; left: 6px; font-size: 7px; color: rgba(255,255,255,0.3); pointer-events: none;">
-                        22 FLÁVIO
+                    <!-- RODAPÉ DA TRANSMISSÃO -->
+                    <div style="padding: 6px; background: rgba(0,0,0,0.85); text-align: center; border-top: 1px solid #333; font-size: 11px; color: #cbd5e1;" class="font-pixel">
+                      TIKTOK INTERATIVO 2026
+                    </div>
+                  </div>
+                </div>
+
+                <!-- CARTÕES DOS CANDIDATOS LOGO ABAIXO DO QUADRO (MESMA LARGURA) -->
+                <div class="preview-candidates-deck">
+                  <!-- Card Lula -->
+                  <div class="candidate-compact-card card-lula">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <div style="display: flex; gap: 6px; align-items: center;">
+                        <span class="font-pixel" style="font-size: 11px; background: #dc2626; color: #fff; padding: 2px 4px; border: 1px solid #000;">13</span>
+                        <strong id="cand-profile-name-lula" class="font-pixel" style="color: #f87171; font-size: 13px;">${candidates.lula.name.toUpperCase()}</strong>
                       </div>
-                      <div class="preview-runner-sprite" id="admin-preview-runner-flavio" style="left: 4px;">
-                        <div class="preview-runner-badge font-pixel" style="background: #2563eb; color: #fff;">22</div>
-                        <div class="preview-runner-body" id="admin-runner-body-flavio" style="background: #3b82f6;">
-                          <div id="aura-flavio"></div>
-                        </div>
+                      <div style="display: flex; align-items: center; gap: 4px;" class="font-pixel">
+                        <span style="color: #ffd165; font-size: 11px;">BUFF:</span>
+                        <span id="admin-effects-lula" style="background: #450a0a; color: #ffd165; border: 1px solid #b91c1c; padding: 2px 6px; font-size: 11px;">
+                          NENHUM
+                        </span>
+                      </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; text-align: center;">
+                      <div class="arcade-panel-inset" style="padding: 4px;">
+                        <div style="font-size: 11px; color: var(--admin-outline); font-family: monospace;">VELOCIDADE</div>
+                        <div id="admin-speed-lula" class="font-pixel" style="font-size: 13px; color: #fff; margin-top: 2px;">0.00 m/s</div>
+                      </div>
+                      <div class="arcade-panel-inset" style="padding: 4px;">
+                        <div style="font-size: 11px; color: var(--admin-outline); font-family: monospace;">DISTÂNCIA</div>
+                        <div id="admin-pos-lula" class="font-pixel" style="font-size: 13px; color: #ffd165; margin-top: 2px;">0.0 m</div>
+                      </div>
+                      <div class="arcade-panel-inset" style="padding: 4px;">
+                        <div style="font-size: 11px; color: var(--admin-outline); font-family: monospace;">PROGRESSO</div>
+                        <div id="admin-pct-lula" class="font-pixel" style="font-size: 13px; color: #f87171; margin-top: 2px;">0%</div>
+                      </div>
+                    </div>
+                    <div class="pixel-progress-frame">
+                      <div class="pixel-progress-track">
+                        <div id="admin-bar-lula" class="pixel-progress-bar-red" style="width: 0%;"></div>
                       </div>
                     </div>
                   </div>
 
-                  <!-- RODAPÉ DA TRANSMISSÃO -->
-                  <div style="padding: 4px; background: rgba(0,0,0,0.85); text-align: center; border-top: 1px solid #333; font-size: 7px; color: #9b8f79;" class="font-pixel">
-                    TIKTOK INTERATIVO 2026
-                  </div>
-                </div>
-              </div>
-
-              <!-- TELEMETRIA DETALHADA DOS CANDIDATOS -->
-              <div style="flex: 1; display: flex; flex-direction: column; gap: 10px; justify-content: center;">
-                <!-- Card Lula -->
-                <div class="pixel-border-red telemetry-card" style="background: var(--admin-surface-low); padding: 8px 10px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; border-bottom: 1px solid #000; padding-bottom: 4px;">
-                    <div style="display: flex; gap: 6px; align-items: center;">
-                      <span class="font-pixel" style="font-size: 9px; background: #dc2626; color: #fff; padding: 2px 4px; border: 1px solid #000; box-shadow: 1px 1px 0 #000;">13</span>
-                      <strong id="cand-profile-name-lula" class="font-pixel" style="color: #ef4444; font-size: 11px;">${candidates.lula.name.toUpperCase()}</strong>
+                  <!-- Card Flávio -->
+                  <div class="candidate-compact-card card-flavio">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <div style="display: flex; gap: 6px; align-items: center;">
+                        <span class="font-pixel" style="font-size: 11px; background: #2563eb; color: #fff; padding: 2px 4px; border: 1px solid #000;">22</span>
+                        <strong id="cand-profile-name-flavio" class="font-pixel" style="color: #60a5fa; font-size: 13px;">${candidates.flavio.name.toUpperCase()}</strong>
+                      </div>
+                      <div style="display: flex; align-items: center; gap: 4px;" class="font-pixel">
+                        <span style="color: #ffd165; font-size: 11px;">BUFF:</span>
+                        <span id="admin-effects-flavio" style="background: #172554; color: #ffd165; border: 1px solid #1e40af; padding: 2px 6px; font-size: 11px;">
+                          NENHUM
+                        </span>
+                      </div>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 4px;" class="font-pixel text-[8px]">
-                      <span style="color: #ffd165; font-size: 8px;">BUFF:</span>
-                      <span id="admin-effects-lula" style="background: #422006; color: #facc15; border: 1px solid #ca8a04; padding: 1px 4px; font-size: 7px;">
-                        NENHUM
-                      </span>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; text-align: center;">
+                      <div class="arcade-panel-inset" style="padding: 4px;">
+                        <div style="font-size: 11px; color: var(--admin-outline); font-family: monospace;">VELOCIDADE</div>
+                        <div id="admin-speed-flavio" class="font-pixel" style="font-size: 13px; color: #fff; margin-top: 2px;">0.00 m/s</div>
+                      </div>
+                      <div class="arcade-panel-inset" style="padding: 4px;">
+                        <div style="font-size: 11px; color: var(--admin-outline); font-family: monospace;">DISTÂNCIA</div>
+                        <div id="admin-pos-flavio" class="font-pixel" style="font-size: 13px; color: #ffd165; margin-top: 2px;">0.0 m</div>
+                      </div>
+                      <div class="arcade-panel-inset" style="padding: 4px;">
+                        <div style="font-size: 11px; color: var(--admin-outline); font-family: monospace;">PROGRESSO</div>
+                        <div id="admin-pct-flavio" class="font-pixel" style="font-size: 13px; color: #60a5fa; margin-top: 2px;">0%</div>
+                      </div>
                     </div>
-                  </div>
-                  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; text-align: center;">
-                    <div class="arcade-panel-inset" style="padding: 4px;">
-                      <div style="font-size: 8px; color: var(--admin-outline); font-family: monospace;">VELOCIDADE</div>
-                      <div id="admin-speed-lula" class="font-pixel" style="font-size: 11px; color: #fff; margin-top: 2px;">0.00 m/s</div>
-                    </div>
-                    <div class="arcade-panel-inset" style="padding: 4px;">
-                      <div style="font-size: 8px; color: var(--admin-outline); font-family: monospace;">DISTÂNCIA</div>
-                      <div id="admin-pos-lula" class="font-pixel" style="font-size: 11px; color: #facc15; margin-top: 2px;">0.0 m</div>
-                    </div>
-                    <div class="arcade-panel-inset" style="padding: 4px;">
-                      <div style="font-size: 8px; color: var(--admin-outline); font-family: monospace;">PROGRESSO</div>
-                      <div id="admin-pct-lula" class="font-pixel" style="font-size: 11px; color: #ef4444; margin-top: 2px;">0%</div>
-                    </div>
-                  </div>
-                  <div class="pixel-progress-frame">
-                    <div class="pixel-progress-track">
-                      <div id="admin-bar-lula" class="pixel-progress-bar-red" style="width: 0%;"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Card Flávio -->
-                <div class="pixel-border-blue telemetry-card" style="background: var(--admin-surface-low); padding: 8px 10px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; border-bottom: 1px solid #000; padding-bottom: 4px;">
-                    <div style="display: flex; gap: 6px; align-items: center;">
-                      <span class="font-pixel" style="font-size: 9px; background: #2563eb; color: #fff; padding: 2px 4px; border: 1px solid #000; box-shadow: 1px 1px 0 #000;">22</span>
-                      <strong id="cand-profile-name-flavio" class="font-pixel" style="color: #60a5fa; font-size: 11px;">${candidates.flavio.name.toUpperCase()}</strong>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 4px;" class="font-pixel text-[8px]">
-                      <span style="color: #ffd165; font-size: 8px;">BUFF:</span>
-                      <span id="admin-effects-flavio" style="background: #422006; color: #facc15; border: 1px solid #ca8a04; padding: 1px 4px; font-size: 7px;">
-                        NENHUM
-                      </span>
-                    </div>
-                  </div>
-                  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; text-align: center;">
-                    <div class="arcade-panel-inset" style="padding: 4px;">
-                      <div style="font-size: 8px; color: var(--admin-outline); font-family: monospace;">VELOCIDADE</div>
-                      <div id="admin-speed-flavio" class="font-pixel" style="font-size: 11px; color: #fff; margin-top: 2px;">0.00 m/s</div>
-                    </div>
-                    <div class="arcade-panel-inset" style="padding: 4px;">
-                      <div style="font-size: 8px; color: var(--admin-outline); font-family: monospace;">DISTÂNCIA</div>
-                      <div id="admin-pos-flavio" class="font-pixel" style="font-size: 11px; color: #facc15; margin-top: 2px;">0.0 m</div>
-                    </div>
-                    <div class="arcade-panel-inset" style="padding: 4px;">
-                      <div style="font-size: 8px; color: var(--admin-outline); font-family: monospace;">PROGRESSO</div>
-                      <div id="admin-pct-flavio" class="font-pixel" style="font-size: 11px; color: #3b82f6; margin-top: 2px;">0%</div>
-                    </div>
-                  </div>
-                  <div class="pixel-progress-frame">
-                    <div class="pixel-progress-track">
-                      <div id="admin-bar-flavio" class="pixel-progress-bar-blue" style="width: 0%;"></div>
+                    <div class="pixel-progress-frame">
+                      <div class="pixel-progress-track">
+                        <div id="admin-bar-flavio" class="pixel-progress-bar-blue" style="width: 0%;"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- ÁREA INFERIOR DE ABAS: TELEMETRIA / RANKINGS / CHAT / CANDIDATOS / PRESENTES -->
-            <div class="arcade-panel" style="flex: 1; display: flex; flex-direction: column; min-height: 220px;">
-              <div style="display: flex; gap: 4px; border-bottom: 2px solid #000; padding: 4px 8px; background: #0a0e18; overflow-x: auto;">
-                <button class="tab-btn ${this.activeTab === 'telemetry' ? 'active' : ''}" data-tab="telemetry">Monitor de Telemetria</button>
-                <button class="tab-btn ${this.activeTab === 'ranking' ? 'active' : ''}" data-tab="ranking">Top Doações</button>
-                <button class="tab-btn ${this.activeTab === 'chat' ? 'active' : ''}" data-tab="chat">Mensagens & Top Chat</button>
-                <button class="tab-btn ${this.activeTab === 'candidates' ? 'active' : ''}" data-tab="candidates">Gerenciar Personagens</button>
-                <button class="tab-btn ${this.activeTab === 'gifts' ? 'active' : ''}" data-tab="gifts">Tabela de Presentes</button>
-              </div>
+              <!-- MONITOR COM ABAS NO ESPAÇO LATERAL AO QUADRO 9:16 -->
+              <div class="admin-tabbed-monitor">
+                <div style="display: flex; gap: 4px; border-bottom: 2px solid #000; padding: 4px 8px; background: #0a0e18; overflow-x: auto; flex-shrink: 0;">
+                  <button class="tab-btn ${this.activeTab === 'telemetry' ? 'active' : ''}" data-tab="telemetry">Monitor de Telemetria</button>
+                  <button class="tab-btn ${this.activeTab === 'ranking' ? 'active' : ''}" data-tab="ranking">Top Doações</button>
+                  <button class="tab-btn ${this.activeTab === 'chat' ? 'active' : ''}" data-tab="chat">Mensagens & Top Chat</button>
+                  <button class="tab-btn ${this.activeTab === 'candidates' ? 'active' : ''}" data-tab="candidates">Gerenciar Personagens</button>
+                  <button class="tab-btn ${this.activeTab === 'gifts' ? 'active' : ''}" data-tab="gifts">Tabela de Presentes</button>
+                </div>
 
-              <div id="admin-tab-content" style="flex: 1; padding: 10px; overflow-y: auto;">
-                ${this.renderTabContent()}
+                <div id="admin-tab-content" style="flex: 1; padding: 12px; overflow-y: auto;">
+                  ${this.renderTabContent()}
+                </div>
               </div>
             </div>
           </main>
@@ -511,39 +514,39 @@ export class AdminPanel {
           <!-- COLUNA DIREITA: ENGINE PARAMETERS & TUNING -->
           <!-- ========================================== -->
           <aside class="admin-col-right">
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #000; padding-bottom: 6px;">
-              <span class="font-pixel" style="font-size: 8px; color: var(--admin-primary);">ENGINE PARAMETERS</span>
-              <button id="admin-btn-reset-tuning" class="arcade-btn arcade-btn-dark" style="font-size: 8px; padding: 2px 6px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #000; padding-bottom: 8px;">
+              <span class="font-pixel" style="font-size: 12px; color: var(--admin-primary);">ENGINE PARAMETERS</span>
+              <button id="admin-btn-reset-tuning" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 4px 8px;">
                 Restaurar Padrão
               </button>
             </div>
 
             <!-- MINI-DECK DE TELEMETRIA INSTANTÂNEA -->
             <div class="mini-telemetry-deck font-mono">
-              <div style="display: flex; justify-content: space-between; font-size: 9px;">
-                <span style="color: #9b8f79;">ESTADO MOTOR:</span>
-                <span id="side-state-readout" style="color: #facc15; font-weight: bold;">AGUARDANDO</span>
+              <div style="display: flex; justify-content: space-between; font-size: 12px;">
+                <span style="color: var(--admin-outline);">ESTADO MOTOR:</span>
+                <span id="side-state-readout" style="color: #ffd165; font-weight: bold;">AGUARDANDO</span>
               </div>
-              <div style="display: flex; justify-content: space-between; font-size: 9px;">
-                <span style="color: #9b8f79;">TEMPO:</span>
+              <div style="display: flex; justify-content: space-between; font-size: 12px;">
+                <span style="color: var(--admin-outline);">TEMPO:</span>
                 <span id="side-time-readout" style="color: #fff;">00:00.00</span>
               </div>
-              <div style="display: flex; justify-content: space-between; font-size: 9px;">
-                <span style="color: #ef4444;">LULA DIST/VEL:</span>
+              <div style="display: flex; justify-content: space-between; font-size: 12px;">
+                <span style="color: #f87171;">LULA DIST/VEL:</span>
                 <span id="side-lula-readout" style="color: #fff;">0.0m / 0.00m/s</span>
               </div>
-              <div style="display: flex; justify-content: space-between; font-size: 9px;">
-                <span style="color: #3b82f6;">FLÁVIO DIST/VEL:</span>
+              <div style="display: flex; justify-content: space-between; font-size: 12px;">
+                <span style="color: #60a5fa;">FLÁVIO DIST/VEL:</span>
                 <span id="side-flavio-readout" style="color: #fff;">0.0m / 0.00m/s</span>
               </div>
             </div>
 
             <!-- PRESETS DE PROVA RÁPIDOS -->
             <div>
-              <div class="font-pixel" style="font-size: 8px; color: var(--admin-outline); margin-bottom: 4px;">
+              <div class="font-pixel" style="font-size: 11px; color: var(--admin-primary); margin-bottom: 6px;">
                 PRESETS DE PROVA
               </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px;">
                 <button class="preset-btn ${this.activePreset === '180' ? 'active' : ''}" data-preset="180">
                   180s (100m)
                 </button>
@@ -564,11 +567,12 @@ export class AdminPanel {
                 class="arcade-input"
                 placeholder="Buscar parâmetro de tuning..."
                 value="${this.paramSearchQuery}"
+                aria-label="Buscar parâmetro de tuning"
               />
             </div>
 
             <!-- AVISO DE POLÍTICA DE TUNING -->
-            <div style="background: #171b26; border-left: 3px solid #facc15; padding: 4px 6px; font-size: 9px; color: #9b8f79;">
+            <div style="background: #171b26; border-left: 3px solid #ffd165; padding: 6px 8px; font-size: 11px; color: var(--admin-outline); line-height: 1.4;">
               ℹ️ Alterações de balanceamento entram em vigor na <strong>próxima corrida</strong>.
             </div>
 
@@ -601,6 +605,11 @@ export class AdminPanel {
       balloons: '🎈',
     };
 
+    // Lê percentuais dinamicamente de tuning.ts (sem valores mágicos no código da interface)
+    const impulsePct = getTuning('power.impulseSpeedPct');
+    const superPct = getTuning('power.superStartSpeedPct');
+    const slipPct = getTuning('power.slipSlowdownPct');
+
     return list
       .map((g) => {
         const isBuff = g.power === 'impulse' || g.power === 'superStart' || g.power === 'shield';
@@ -609,26 +618,29 @@ export class AdminPanel {
         const borderClass = g.power === 'superStart' ? 'super' : isBuff ? 'buff' : 'debuff';
 
         let desc = '';
-        if (g.power === 'impulse') desc = `+20% SPD → ${g.candidateBenefited.toUpperCase()}`;
-        else if (g.power === 'superStart') desc = `+60% SPD → ${g.candidateBenefited.toUpperCase()}`;
-        else if (g.power === 'slip') desc = `-35% SPD → ${g.candidateBenefited === 'lula' ? 'FLÁVIO' : 'LULA'}`;
+        if (g.power === 'impulse') desc = `+${impulsePct}% VEL → ${g.candidateBenefited.toUpperCase()}`;
+        else if (g.power === 'superStart') desc = `+${superPct}% VEL → ${g.candidateBenefited.toUpperCase()}`;
+        else if (g.power === 'slip') desc = `-${slipPct}% VEL → ${g.candidateBenefited === 'lula' ? 'FLÁVIO' : 'LULA'}`;
         else if (g.power === 'trip') desc = `TROPEÇO → ${g.candidateBenefited === 'lula' ? 'FLÁVIO' : 'LULA'}`;
         else if (g.power === 'shield') desc = `ESCUDO → ${g.candidateBenefited.toUpperCase()}`;
 
         return `
-        <button class="arcade-gift-card ${borderClass} quick-gift-btn" data-gift="${g.giftId}" style="width: 100%;">
+        <button class="arcade-gift-card ${borderClass} quick-gift-btn" data-gift="${g.giftId}" style="width: 100%;" aria-label="Enviar presente ${g.name}">
           <div style="font-size: 20px; line-height: 1;">${iconMap[g.giftId] || '🎁'}</div>
           <div style="flex: 1; min-width: 0;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span class="font-pixel" style="font-size: 8px; color: #fff;">${g.name.toUpperCase()}</span>
+              <span class="font-pixel" style="font-size: 11px; color: #fff;">${g.name.toUpperCase()}</span>
               <span class="${badgeClass}">${badgeText}</span>
             </div>
-            <div style="font-size: 8px; color: var(--admin-outline); margin-top: 2px;" class="font-mono">
+            <div style="font-size: 11px; color: var(--admin-outline); margin-top: 2px;" class="font-mono">
               ${desc}
             </div>
           </div>
-          <div class="font-mono" style="font-size: 9px; color: #facc15; font-weight: bold; white-space: nowrap;">
-            💎 ${g.diamondCost}
+          <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end;">
+            <span class="font-mono" style="font-size: 12px; color: #ffd165; font-weight: bold; white-space: nowrap;">
+              💎 ${g.diamondCost}
+            </span>
+            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">provisório</span>
           </div>
         </button>
       `;
@@ -727,11 +739,11 @@ export class AdminPanel {
 
                       return `
                   <tr>
-                    <td style="color: #64748b; font-size: 9px;">${new Date(log.timeIso).toLocaleTimeString()}</td>
+                    <td style="color: #94a3b8; font-size: 11px;">${new Date(log.timeIso).toLocaleTimeString()}</td>
                     <td>${badgeHtml}</td>
-                    <td style="color: #94a3b8; font-size: 10px;">${originText}</td>
-                    <td style="color: #dfe2f1;">${payloadText}</td>
-                    <td style="text-align: right; color: ${statusColor}; font-weight: bold; font-size: 9px;" class="font-pixel">${statusText}</td>
+                    <td style="color: #cbd5e1; font-size: 12px; font-weight: 500;">${originText}</td>
+                    <td style="color: #ffffff; font-size: 12px; word-break: break-word;">${payloadText}</td>
+                    <td style="text-align: right; color: ${statusColor}; font-weight: bold; font-size: 12px;" class="font-pixel">${statusText}</td>
                   </tr>
                 `;
                     })
@@ -804,7 +816,7 @@ export class AdminPanel {
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
           <!-- COLUNA 1: ÚLTIMAS MENSAGENS -->
           <div>
-            <div class="font-pixel" style="font-size: 8px; color: var(--admin-primary); margin-bottom: 6px;">
+            <div class="font-pixel" style="font-size: 11px; color: var(--admin-primary); margin-bottom: 8px;">
               FEED DE MENSAGENS AO VIVO
             </div>
             <table class="arcade-table font-mono">
@@ -824,14 +836,14 @@ export class AdminPanel {
                         .map(
                           (m) => `
                       <tr>
-                        <td style="color: #64748b;">${new Date(m.timestamp).toLocaleTimeString()}</td>
-                        <td style="color: #fff;">${m.userName}</td>
+                        <td style="color: #94a3b8; font-size: 11px;">${new Date(m.timestamp).toLocaleTimeString()}</td>
+                        <td style="color: #ffffff; font-size: 12px; font-weight: bold;">${m.userName}</td>
                         <td>
-                          <span style="background: ${m.candidateNumber === '13' ? '#dc2626' : '#2563eb'}; color: #fff; padding: 1px 4px; font-weight: bold;">
+                          <span style="background: ${m.candidateNumber === '13' ? '#dc2626' : '#2563eb'}; color: #fff; padding: 2px 6px; font-weight: bold; font-size: 11px;">
                             ${m.candidateNumber}
                           </span>
                         </td>
-                        <td style="color: #dfe2f1;">${m.message}</td>
+                        <td style="color: #ffffff; font-size: 12px;">${m.message}</td>
                       </tr>
                     `,
                         )
@@ -843,7 +855,7 @@ export class AdminPanel {
 
           <!-- COLUNA 2: TOP MENSAGENS MAIS FREQUENTES -->
           <div>
-            <div class="font-pixel" style="font-size: 8px; color: #38bdf8; margin-bottom: 6px;">
+            <div class="font-pixel" style="font-size: 11px; color: #38bdf8; margin-bottom: 8px;">
               TOP MENSAGENS MAIS FREQUENTES (AUDIÊNCIA)
             </div>
             <table class="arcade-table font-mono">
@@ -890,49 +902,49 @@ export class AdminPanel {
     if (this.activeTab === 'candidates') {
       const profiles = liveServiceMock.getCandidateProfiles();
       return `
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
           <!-- Candidato 1: Lula -->
-          <div class="arcade-panel" style="padding: 10px; border-left: 4px solid ${profiles.lula.color};">
-            <div class="font-pixel" style="font-size: 9px; color: #ef4444; margin-bottom: 6px;">CANDIDATO 1</div>
-            <label style="font-size: 10px; color: #9b8f79;">Nome Exibido:</label>
-            <input type="text" id="admin-cand-name-lula" class="arcade-input" value="${profiles.lula.name}" style="margin-bottom: 6px;" />
+          <div class="arcade-panel" style="padding: 12px; border-left: 4px solid ${profiles.lula.color};">
+            <div class="font-pixel" style="font-size: 13px; color: #f87171; margin-bottom: 8px;">CANDIDATO 1</div>
+            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Nome Exibido:</label>
+            <input type="text" id="admin-cand-name-lula" class="arcade-input" value="${profiles.lula.name}" style="margin-bottom: 8px; font-size: 12px;" />
 
-            <label style="font-size: 10px; color: #9b8f79;">Número Eleitoral:</label>
-            <input type="text" id="admin-cand-num-lula" class="arcade-input" value="${profiles.lula.number}" style="margin-bottom: 6px;" />
+            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Número Eleitoral:</label>
+            <input type="text" id="admin-cand-num-lula" class="arcade-input" value="${profiles.lula.number}" style="margin-bottom: 8px; font-size: 12px;" />
 
-            <label style="font-size: 10px; color: #9b8f79;">Cor Principal (Hex):</label>
-            <div style="display: flex; gap: 6px; margin-bottom: 6px;">
-              <input type="color" id="admin-cand-color-picker-lula" value="${profiles.lula.color}" style="width: 32px; height: 28px; padding: 0; background: none; border: 1px solid #000;" />
-              <input type="text" id="admin-cand-color-lula" class="arcade-input" value="${profiles.lula.color}" />
+            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Cor Principal (Hex):</label>
+            <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+              <input type="color" id="admin-cand-color-picker-lula" value="${profiles.lula.color}" style="width: 36px; height: 32px; padding: 0; background: none; border: 1px solid #000; cursor: pointer;" />
+              <input type="text" id="admin-cand-color-lula" class="arcade-input" value="${profiles.lula.color}" style="font-size: 12px;" />
             </div>
 
-            <label style="font-size: 10px; color: #9b8f79;">URL do Avatar / Cabeça (opcional):</label>
-            <input type="text" id="admin-cand-avatar-lula" class="arcade-input" value="${profiles.lula.avatarUrl}" placeholder="https://..." style="margin-bottom: 10px;" />
+            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">URL do Avatar / Cabeça (opcional):</label>
+            <input type="text" id="admin-cand-avatar-lula" class="arcade-input" value="${profiles.lula.avatarUrl}" placeholder="https://..." style="margin-bottom: 12px; font-size: 12px;" />
 
-            <button id="admin-btn-save-cand-lula" class="arcade-btn arcade-btn-danger" style="font-size: 9px; width: 100%;">
+            <button id="admin-btn-save-cand-lula" class="arcade-btn arcade-btn-danger" style="font-size: 12px; width: 100%; padding: 8px 12px;">
               Salvar Alterações Candidato 1
             </button>
           </div>
 
           <!-- Candidato 2: Flávio -->
-          <div class="arcade-panel" style="padding: 10px; border-left: 4px solid ${profiles.flavio.color};">
-            <div class="font-pixel" style="font-size: 9px; color: #3b82f6; margin-bottom: 6px;">CANDIDATO 2</div>
-            <label style="font-size: 10px; color: #9b8f79;">Nome Exibido:</label>
-            <input type="text" id="admin-cand-name-flavio" class="arcade-input" value="${profiles.flavio.name}" style="margin-bottom: 6px;" />
+          <div class="arcade-panel" style="padding: 12px; border-left: 4px solid ${profiles.flavio.color};">
+            <div class="font-pixel" style="font-size: 13px; color: #60a5fa; margin-bottom: 8px;">CANDIDATO 2</div>
+            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Nome Exibido:</label>
+            <input type="text" id="admin-cand-name-flavio" class="arcade-input" value="${profiles.flavio.name}" style="margin-bottom: 8px; font-size: 12px;" />
 
-            <label style="font-size: 10px; color: #9b8f79;">Número Eleitoral:</label>
-            <input type="text" id="admin-cand-num-flavio" class="arcade-input" value="${profiles.flavio.number}" style="margin-bottom: 6px;" />
+            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Número Eleitoral:</label>
+            <input type="text" id="admin-cand-num-flavio" class="arcade-input" value="${profiles.flavio.number}" style="margin-bottom: 8px; font-size: 12px;" />
 
-            <label style="font-size: 10px; color: #9b8f79;">Cor Principal (Hex):</label>
-            <div style="display: flex; gap: 6px; margin-bottom: 6px;">
-              <input type="color" id="admin-cand-color-picker-flavio" value="${profiles.flavio.color}" style="width: 32px; height: 28px; padding: 0; background: none; border: 1px solid #000;" />
-              <input type="text" id="admin-cand-color-flavio" class="arcade-input" value="${profiles.flavio.color}" />
+            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">Cor Principal (Hex):</label>
+            <div style="display: flex; gap: 6px; margin-bottom: 8px;">
+              <input type="color" id="admin-cand-color-picker-flavio" value="${profiles.flavio.color}" style="width: 36px; height: 32px; padding: 0; background: none; border: 1px solid #000; cursor: pointer;" />
+              <input type="text" id="admin-cand-color-flavio" class="arcade-input" value="${profiles.flavio.color}" style="font-size: 12px;" />
             </div>
 
-            <label style="font-size: 10px; color: #9b8f79;">URL do Avatar / Cabeça (opcional):</label>
-            <input type="text" id="admin-cand-avatar-flavio" class="arcade-input" value="${profiles.flavio.avatarUrl}" placeholder="https://..." style="margin-bottom: 10px;" />
+            <label style="font-size: 12px; color: #cbd5e1; font-weight: bold; display: block; margin-bottom: 3px;">URL do Avatar / Cabeça (opcional):</label>
+            <input type="text" id="admin-cand-avatar-flavio" class="arcade-input" value="${profiles.flavio.avatarUrl}" placeholder="https://..." style="margin-bottom: 12px; font-size: 12px;" />
 
-            <button id="admin-btn-save-cand-flavio" class="arcade-btn arcade-btn-primary" style="font-size: 9px; width: 100%; background: #2563eb; color: #fff;">
+            <button id="admin-btn-save-cand-flavio" class="arcade-btn arcade-btn-primary" style="font-size: 12px; width: 100%; background: #2563eb; color: #fff; padding: 8px 12px;">
               Salvar Alterações Candidato 2
             </button>
           </div>
@@ -944,10 +956,10 @@ export class AdminPanel {
       const list = giftRegistry.list();
       return `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <div style="font-size: 10px; color: #9b8f79;">
+          <div style="font-size: 11px; color: #cbd5e1;">
             Edição dos presentes configurados na live (ID, custo, efeito e candidato beneficiado)
           </div>
-          <button id="admin-btn-reset-gifts" class="arcade-btn arcade-btn-dark" style="font-size: 8px; padding: 3px 6px;">
+          <button id="admin-btn-reset-gifts" class="arcade-btn arcade-btn-dark" style="font-size: 11px; padding: 5px 10px;">
             Restaurar Presentes Padrão
           </button>
         </div>
@@ -968,18 +980,18 @@ export class AdminPanel {
               .map(
                 (g) => `
               <tr>
-                <td style="color: #64748b;">${g.giftId}</td>
-                <td style="color: #fff; font-weight: bold;">${g.name}</td>
-                <td style="color: #facc15; font-weight: bold;">💎 ${g.diamondCost}</td>
-                <td><span style="color: #38bdf8;">${g.power}</span></td>
+                <td style="color: #94a3b8; font-size: 11px;">${g.giftId}</td>
+                <td style="color: #fff; font-weight: bold; font-size: 12px;">${g.name}</td>
+                <td style="color: #ffd165; font-weight: bold; font-size: 12px;">💎 ${g.diamondCost}</td>
+                <td><span style="color: #38bdf8; font-size: 12px;">${g.power}</span></td>
                 <td>
-                  <span style="color: ${g.candidateBenefited === 'lula' ? '#ef4444' : '#3b82f6'}; font-weight: bold;">
+                  <span style="color: ${g.candidateBenefited === 'lula' ? '#f87171' : '#60a5fa'}; font-weight: bold; font-size: 12px;">
                     ${g.candidateBenefited.toUpperCase()}
                   </span>
                 </td>
                 <td>
-                  <button class="arcade-btn arcade-btn-dark btn-edit-gift" data-giftid="${g.giftId}" style="font-size: 8px; padding: 2px 6px;">
-                    Editar
+                  <button class="arcade-btn arcade-btn-dark btn-edit-gift" data-giftid="${g.giftId}" style="font-size: 11px; padding: 4px 8px;">
+                    ✏️ Editar
                   </button>
                 </td>
               </tr>
@@ -1012,7 +1024,7 @@ export class AdminPanel {
     const groupNames: Record<string, string> = {
       race: 'Pista & Duração',
       chat: 'Regras Chat & Anti-Spam',
-      power: 'Poderes & Gifts',
+      power: 'Poderes & Presentes',
       balance: 'Equilíbrio & Rubber-Band',
       auto: 'Corrida Automática (Idle)',
     };
@@ -1025,28 +1037,64 @@ export class AdminPanel {
       auto: '🤖',
     };
 
+    // Mapeamento de nomes amigáveis em português para cada parâmetro
+    const paramTitlesPt: Record<string, string> = {
+      'race.targetDurationSec': 'Duração Alvo da Corrida',
+      'race.trackLength': 'Comprimento da Pista',
+      'race.intermissionSec': 'Tempo de Intervalo',
+      'chat.minIntervalPerUserSec': 'Intervalo Mínimo por Usuário',
+      'chat.maxLeadShiftPct': 'Teto de Deslocamento do Chat',
+      'chat.pushSpeedPct': 'Impulso de Velocidade por Mensagem',
+      'chat.pushDurationSec': 'Duração do Impulso do Chat',
+      'power.impulseSpeedPct': 'Impulso de Velocidade (Rosa)',
+      'power.impulseDurationSec': 'Duração do Impulso (Rosa)',
+      'power.slipSlowdownPct': 'Redução por Escorregão (Banana)',
+      'power.slipDurationSec': 'Duração do Escorregão (Banana)',
+      'power.superStartSpeedPct': 'Super Arrancada (Donut/Capivara)',
+      'power.superStartDurationSec': 'Duração da Super Arrancada',
+      'power.tripSlowdownPct': 'Redução por Tropeço (Confete)',
+      'power.tripDurationSec': 'Duração do Tropeço (Confete)',
+      'power.shieldDurationSec': 'Duração do Escudo Protetor',
+      'power.stackMaxFactor': 'Fator Máximo de Acúmulo de Efeito',
+      'balance.rubberBandPct': 'Bônus Máximo de Rubber-Band',
+      'balance.rubberBandGapPct': 'Distância Mínima para Rubber-Band',
+      'auto.idleThresholdSec': 'Tempo de Espera para Modo Auto',
+      'auto.paceVariationPct': 'Variação Natural de Ritmo',
+      'auto.simulatePowers': 'Simular Poderes no Modo Auto',
+      'auto.simulatePowersRatePerSec': 'Taxa de Poderes Simulados/s',
+    };
+
     return Object.entries(groups)
       .map(([group, items]) => {
         const isCollapsed = this.collapsedGroups.has(group);
         return `
-        <div class="arcade-panel" style="border: 1px solid #000; box-shadow: 2px 2px 0 #000; margin-bottom: 4px;">
-          <button class="accordion-header" data-accordion="${group}">
-            <div style="display: flex; align-items: center; gap: 6px;">
+        <div class="arcade-panel" style="border: 1px solid #000; box-shadow: 2px 2px 0 #000; margin-bottom: 6px;">
+          <button class="accordion-header" data-accordion="${group}" aria-expanded="${!isCollapsed}">
+            <div style="display: flex; align-items: center; gap: 8px;">
               <span>${groupIcons[group] || '⚙'}</span>
               <span>${groupNames[group] || group.toUpperCase()}</span>
             </div>
-            <span class="accordion-arrow font-pixel" style="font-size: 8px;">${isCollapsed ? '▼' : '▲'}</span>
+            <span class="accordion-arrow font-pixel" style="font-size: 11px;">${isCollapsed ? '▼' : '▲'}</span>
           </button>
           <div class="accordion-body ${isCollapsed ? 'collapsed' : ''}" id="acc-body-${group}">
             ${items
               .map(
-                (p) => `
-              <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
-                <div style="display: flex; justify-content: space-between; font-size: 10px;">
-                  <strong style="color: #dfe2f1;">${p.path.split('.')[1]}</strong>
-                  <span style="color: #facc15;" class="font-mono" id="label-val-${p.path}">${p.value} ${p.unit}</span>
+                (p) => {
+                  const ptTitle = paramTitlesPt[p.path] || p.path.split('.')[1];
+                  return `
+              <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding: 8px 0;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; gap: 8px;">
+                  <div>
+                    <strong style="color: #ffffff;">${ptTitle}</strong>
+                    <span class="font-mono" style="font-size: 11px; color: #94a3b8; margin-left: 6px;">(${p.path})</span>
+                  </div>
+                  <span style="color: #ffd165; font-size: 13px;" class="font-mono font-bold" id="label-val-${p.path}">
+                    ${p.value} ${p.unit}
+                  </span>
                 </div>
-                <div style="font-size: 9px; color: #9b8f79; margin-bottom: 4px;">${p.desc}</div>
+                <div style="font-size: 11px; color: var(--admin-outline); margin: 3px 0 6px 0; line-height: 1.35;">
+                  ${p.desc}
+                </div>
                 <input
                   type="range"
                   class="arcade-tuning-slider"
@@ -1055,10 +1103,12 @@ export class AdminPanel {
                   max="${p.max}"
                   step="${p.max <= 10 ? '0.1' : '1'}"
                   value="${p.value}"
-                  style="width: 100%; accent-color: var(--admin-primary);"
+                  aria-label="${ptTitle}"
+                  style="width: 100%; accent-color: var(--admin-primary); cursor: pointer;"
                 />
               </div>
-            `,
+            `;
+                },
               )
               .join('')}
           </div>
