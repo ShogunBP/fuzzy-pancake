@@ -4,6 +4,7 @@ import { giftRegistry } from '../config/gifts';
 import { liveServiceMock } from '../core/live_service_mock';
 import { RaceEngine } from '../core/race_engine';
 import { AdminPanel, escapeHtml } from './admin_panel';
+import { EventLogUI } from './event_log_ui';
 
 describe('AdminPanel - Segurança contra XSS e Sanitização de Conteúdo Externo', () => {
   let engine: RaceEngine;
@@ -60,8 +61,8 @@ describe('AdminPanel - Segurança contra XSS e Sanitização de Conteúdo Extern
       `;
 
       // Simula aba ativa 'chat' e popula via populateTabTables
-      (panel as any).activeTab = 'chat';
-      panel.populateTabTables(document.getElementById('admin-tab-content'));
+      (panel as any).activeMonitorTab = 'chat';
+      panel.populateTabTables(container);
 
       const feedTbody = document.getElementById('admin-chat-feed-tbody')!;
       // NENHUM elemento <img> deve existir dentro do tbody
@@ -114,8 +115,8 @@ describe('AdminPanel - Segurança contra XSS e Sanitização de Conteúdo Extern
         </div>
       `;
 
-      (panel as any).activeTab = 'ranking';
-      panel.populateTabTables(document.getElementById('admin-tab-content'));
+      (panel as any).activeMonitorTab = 'ranking';
+      panel.populateTabTables(container);
 
       const tbody = document.getElementById('admin-ranking-tbody')!;
       // Garante que nenhuma tag img foi instanciada
@@ -138,14 +139,14 @@ describe('AdminPanel - Segurança contra XSS e Sanitização de Conteúdo Extern
 
       container.innerHTML = `
         <div id="admin-tab-content">
-          <table><tbody id="admin-gifts-tbody"></tbody></table>
+          <table><tbody id="admin-config-gifts-tbody"></tbody></table>
         </div>
       `;
 
-      (panel as any).activeTab = 'gifts';
-      panel.populateTabTables(document.getElementById('admin-tab-content'));
+      (panel as any).configCategory = 'gifts';
+      panel.populateTabTables(container);
 
-      const tbody = document.getElementById('admin-gifts-tbody')!;
+      const tbody = document.getElementById('admin-config-gifts-tbody')!;
       expect(tbody.querySelectorAll('img').length).toBe(0);
 
       const nameCell = tbody.querySelector('td:nth-child(2)');
@@ -175,12 +176,34 @@ describe('AdminPanel - Segurança contra XSS e Sanitização de Conteúdo Extern
         </div>
       `;
 
-      (panel as any).activeTab = 'telemetry';
-      panel.populateTabTables(document.getElementById('admin-tab-content'));
+      (panel as any).activeMonitorTab = 'telemetry';
+      panel.populateTabTables(container);
 
       const tbody = document.getElementById('admin-telemetry-tbody')!;
       expect(tbody.querySelectorAll('img').length).toBe(0);
       expect((window as any).__xss_log).toBeUndefined();
+    });
+  });
+
+  describe('Proteção XSS no EventLogUI (?debug=1)', () => {
+    it('renderiza logs de chat maliciosos no EventLogUI sem executar HTML/script', () => {
+      const logContainer = document.createElement('div');
+      logContainer.id = 'log-container';
+      document.body.appendChild(logContainer);
+
+      new EventLogUI(engine, logContainer);
+
+      const xssPayload = '<img src=x onerror="window.__xss_eventlog=true">';
+      engine.handleEvent({
+        type: 'chat',
+        userId: xssPayload,
+        candidateId: 'lula',
+        timestamp: Date.now(),
+      });
+
+      expect(logContainer.querySelectorAll('img').length).toBe(0);
+      expect((window as any).__xss_eventlog).toBeUndefined();
+      expect(logContainer.textContent).toContain(xssPayload);
     });
   });
 });

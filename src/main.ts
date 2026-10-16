@@ -10,6 +10,12 @@ const engine = new RaceEngine({ isDebug });
 const isAdminRoute = window.location.pathname.startsWith('/admin') || new URLSearchParams(window.location.search).has('admin');
 
 if (isAdminRoute) {
+  document.body.className = 'admin-body';
+  document.body.style.margin = '0';
+  document.body.style.padding = '0';
+  document.body.style.overflow = 'hidden';
+  document.body.style.display = 'block';
+
   let adminContainer = document.getElementById('admin-container');
   if (!adminContainer) {
     adminContainer = document.createElement('div');

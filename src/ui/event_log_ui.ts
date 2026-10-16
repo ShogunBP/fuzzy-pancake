@@ -149,13 +149,25 @@ export class EventLogUI {
 
     if (entry.kind === 'lifecycle') {
       div.classList.add('log-lifecycle');
-      div.innerHTML = `
-        <span class="log-time">${timeStr}</span>
-        <span class="log-badge badge-system">SISTEMA</span>
-        <span class="log-body">
-          <b>${entry.code}</b> — ${entry.description}
-        </span>
-      `;
+
+      const spanTime = document.createElement('span');
+      spanTime.className = 'log-time';
+      spanTime.textContent = timeStr;
+      div.appendChild(spanTime);
+
+      const spanBadge = document.createElement('span');
+      spanBadge.className = 'log-badge badge-system';
+      spanBadge.textContent = 'SISTEMA';
+      div.appendChild(spanBadge);
+
+      const spanBody = document.createElement('span');
+      spanBody.className = 'log-body';
+      const bCode = document.createElement('b');
+      bCode.textContent = entry.code;
+      spanBody.appendChild(bCode);
+      spanBody.appendChild(document.createTextNode(` — ${entry.description}`));
+      div.appendChild(spanBody);
+
       return div;
     }
 
@@ -174,27 +186,52 @@ export class EventLogUI {
       badgeLabel = 'IGNORADO';
     }
 
+    const spanTime = document.createElement('span');
+    spanTime.className = 'log-time';
+    spanTime.textContent = timeStr;
+    div.appendChild(spanTime);
+
+    const spanBadge = document.createElement('span');
+    spanBadge.className = `log-badge ${badgeClass}`;
+    spanBadge.textContent = badgeLabel;
+    div.appendChild(spanBadge);
+
+    const divContent = document.createElement('div');
+    divContent.className = 'log-content';
+
+    const divTitle = document.createElement('div');
+    divTitle.className = 'log-event-title';
+
     const ev = entry.event;
-    let eventName = '';
     if (ev.type === 'chat') {
       const candName = ev.candidateId === 'lula' ? 'Lula (13)' : 'Flávio (22)';
-      eventName = `💬 Chat "${ev.candidateId === 'lula' ? '13' : '22'}" (${candName}) de <code>${ev.userId}</code>`;
+      divTitle.appendChild(document.createTextNode(`💬 Chat "${ev.candidateId === 'lula' ? '13' : '22'}" (${candName}) de `));
+      const codeUser = document.createElement('code');
+      codeUser.textContent = ev.userId;
+      divTitle.appendChild(codeUser);
     } else {
-      eventName = `🎁 Presente [${ev.giftId}] para ${ev.candidateBenefited.toUpperCase()}`;
+      divTitle.textContent = `🎁 Presente [${ev.giftId}] para ${ev.candidateBenefited.toUpperCase()}`;
     }
+    divContent.appendChild(divTitle);
 
-    div.innerHTML = `
-      <span class="log-time">${timeStr}</span>
-      <span class="log-badge ${badgeClass}">${badgeLabel}</span>
-      <div class="log-content">
-        <div class="log-event-title">${eventName}</div>
-        <div class="log-reason">
-          <span class="log-code">[${entry.code}]</span> ${entry.reason}
-          ${entry.effectDescription ? `<b class="log-effect">» ${entry.effectDescription}</b>` : ''}
-        </div>
-      </div>
-    `;
+    const divReason = document.createElement('div');
+    divReason.className = 'log-reason';
 
+    const spanCode = document.createElement('span');
+    spanCode.className = 'log-code';
+    spanCode.textContent = `[${entry.code}]`;
+    divReason.appendChild(spanCode);
+    divReason.appendChild(document.createTextNode(` ${entry.reason}`));
+
+    if (entry.effectDescription) {
+      const bEffect = document.createElement('b');
+      bEffect.className = 'log-effect';
+      bEffect.textContent = ` » ${entry.effectDescription}`;
+      divReason.appendChild(bEffect);
+    }
+    divContent.appendChild(divReason);
+
+    div.appendChild(divContent);
     return div;
   }
 
