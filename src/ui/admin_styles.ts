@@ -443,6 +443,25 @@ header.admin-header {
   border: 1px solid rgba(234, 179, 8, 0.6);
   text-align: center;
   padding: 4px 6px;
+  font-size: 11px;
+  color: #ffd165;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+.preview-jumbotron.winner-lula {
+  background: #450a0a;
+  border-color: #ef4444;
+  color: #ffd165;
+  animation: jumbotron-pulse 0.9s infinite alternate ease-in-out;
+}
+.preview-jumbotron.winner-flavio {
+  background: #0c2340;
+  border-color: #3b82f6;
+  color: #ffd165;
+  animation: jumbotron-pulse 0.9s infinite alternate ease-in-out;
+}
+@keyframes jumbotron-pulse {
+  0% { box-shadow: 0 0 4px rgba(255, 209, 101, 0.3), inset 0 0 4px rgba(0, 0, 0, 0.8); }
+  100% { box-shadow: 0 0 12px rgba(255, 209, 101, 0.8), inset 0 0 8px rgba(255, 209, 101, 0.4); }
 }
 
 /* Régua de Distância 9:16 */
@@ -504,6 +523,13 @@ header.admin-header {
   border-right: 2px solid #000;
   opacity: 0.9;
   z-index: 5;
+}
+.checkered-finish-line.finish-line-victory {
+  animation: finish-flash 0.8s infinite alternate ease-in-out;
+}
+@keyframes finish-flash {
+  0% { filter: brightness(1) drop-shadow(0 0 2px #ffd165); }
+  100% { filter: brightness(1.6) drop-shadow(0 0 8px #ffd165); }
 }
 
 /* Sprite do Corredor */
@@ -591,6 +617,64 @@ header.admin-header {
 }
 .candidate-compact-card.card-flavio {
   border-left: 4px solid #3b82f6;
+}
+.candidate-compact-card.card-winner {
+  border: 2px solid #ffd165 !important;
+  box-shadow: 0 0 12px rgba(255, 209, 101, 0.35), 2px 2px 0 0 #000 !important;
+  position: relative;
+}
+.candidate-compact-card.card-winner::after {
+  content: '★ VENCEDOR DA RODADA ★';
+  position: absolute;
+  top: -9px;
+  right: 8px;
+  background: #ffd165;
+  color: #000;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border: 1px solid #000;
+  box-shadow: 1px 1px 0 #000;
+  letter-spacing: 0.05em;
+  z-index: 15;
+}
+
+/* Micro-Badges Flutuantes Táteis nos Disparos de Poderes e Chat */
+.arcade-float-badge {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -50%);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 8px;
+  background: #000000;
+  border: 1px solid currentColor;
+  box-shadow: 2px 2px 0 0 #000;
+  pointer-events: none;
+  z-index: 30;
+  white-space: nowrap;
+  animation: float-badge-up 0.75s ease-out forwards;
+}
+@keyframes float-badge-up {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.85);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -8px) scale(1.05);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -16px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -24px) scale(0.95);
+  }
 }
 
 /* Painel de Abas Lateral ao Preview */
@@ -750,6 +834,15 @@ header.admin-header {
   flex-direction: column;
   gap: 16px;
   text-align: center;
+}
+.admin-auth-card.arcade-shake {
+  animation: arcade-shake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+@keyframes arcade-shake {
+  10%, 90% { transform: translate3d(-2px, 0, 0); }
+  20%, 80% { transform: translate3d(4px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+  40%, 60% { transform: translate3d(6px, 0, 0); }
 }
 .admin-auth-header {
   border-bottom: 2px solid #000;
@@ -919,13 +1012,19 @@ header.admin-header {
   .runner-aura-boost,
   .preview-lane.flash-push,
   .animate-arcade-blink,
-  .crt-overlay.active {
+  .crt-overlay.active,
+  .admin-auth-card.arcade-shake,
+  .preview-jumbotron.winner-lula,
+  .preview-jumbotron.winner-flavio,
+  .checkered-finish-line.finish-line-victory,
+  .arcade-float-badge {
     animation: none !important;
   }
   .pixel-progress-bar-red,
   .pixel-progress-bar-blue,
   .preview-runner-sprite,
-  .arcade-btn {
+  .arcade-btn,
+  .preview-jumbotron {
     transition: none !important;
   }
 }

@@ -67,7 +67,7 @@ export class AdminPanel {
   private renderAuthScreen(errorMessage = ''): void {
     this.container.innerHTML = `
       <div class="admin-auth-overlay">
-        <div class="admin-auth-card">
+        <div class="admin-auth-card ${errorMessage ? 'arcade-shake' : ''}">
           <div class="admin-auth-header">
             <div class="font-pixel" style="font-size: 13px; color: var(--admin-primary); margin-bottom: 6px;">
               ★ OPERATOR ACCESS ★
@@ -104,7 +104,7 @@ export class AdminPanel {
                 : ''
             }
 
-            <button type="submit" class="arcade-btn arcade-btn-primary" style="padding: 10px; font-size: 12px;">
+            <button type="submit" id="admin-auth-btn-submit" class="arcade-btn arcade-btn-primary" style="padding: 10px; font-size: 12px;">
               DESBLOQUEAR COCKPIT
             </button>
             <div style="font-size: 11px; color: #94a3b8; font-family: monospace;">
@@ -122,9 +122,17 @@ export class AdminPanel {
       e.preventDefault();
       const pin = input?.value?.trim();
       if (pin === ADMIN_DEFAULT_PIN) {
-        this.isAuthenticated = true;
-        sessionStorage.setItem('admin_auth_token', 'authorized');
-        this.renderCockpit();
+        const btn = document.getElementById('admin-auth-btn-submit');
+        if (btn) {
+          btn.textContent = 'ACESSO AUTORIZADO • TELEMETRIA ONLINE';
+          btn.className = 'arcade-btn arcade-btn-green font-pixel';
+        }
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        setTimeout(() => {
+          this.isAuthenticated = true;
+          sessionStorage.setItem('admin_auth_token', 'authorized');
+          this.renderCockpit();
+        }, prefersReduced ? 0 : 300);
       } else {
         this.renderAuthScreen('PIN INCORRETO. TENTE NOVAMENTE.');
       }
@@ -371,7 +379,7 @@ export class AdminPanel {
                         <div class="preview-floodlight"></div>
                         <div class="preview-floodlight"></div>
                       </div>
-                      <div class="preview-jumbotron font-pixel" style="font-size: 11px; color: #ffd165;">
+                      <div class="preview-jumbotron font-pixel" id="preview-jumbotron-display">
                         GRANDE PRÊMIO BRASÍLIA
                       </div>
                     </div>
@@ -1281,6 +1289,7 @@ export class AdminPanel {
     // Chat Simulado Lula (+1 e Spam com LED)
     document.getElementById('admin-btn-chat-13')?.addEventListener('click', () => {
       this.triggerPushVisual('lula');
+      this.spawnFloatingCombatText('lula', '💬 +1 VOTO!', '#fca5a5');
       this.engine.handleEvent({
         type: 'chat',
         userId: `op_${Date.now()}`,
@@ -1332,6 +1341,7 @@ export class AdminPanel {
     // Chat Simulado Flávio (+1 e Spam com LED)
     document.getElementById('admin-btn-chat-22')?.addEventListener('click', () => {
       this.triggerPushVisual('flavio');
+      this.spawnFloatingCombatText('flavio', '💬 +1 VOTO!', '#93c5fd');
       this.engine.handleEvent({
         type: 'chat',
         userId: `op_${Date.now()}`,
@@ -1388,7 +1398,31 @@ export class AdminPanel {
         const mapping = giftRegistry.get(giftId);
         if (!mapping) return;
 
+        let targetCand = mapping.candidateBenefited;
+        let badgeText = `⚡ ${mapping.name.toUpperCase()}`;
+        let badgeColor = '#ffd165';
+
+        if (mapping.power === 'superStart') {
+          badgeText = '⚡ SUPER ARRANCADA!';
+          badgeColor = '#ffd165';
+        } else if (mapping.power === 'shield') {
+          badgeText = '🛡️ ESCUDO ATIVO!';
+          badgeColor = '#38bdf8';
+        } else if (mapping.power === 'slip') {
+          targetCand = mapping.candidateBenefited === 'lula' ? 'flavio' : 'lula';
+          badgeText = '🍌 CASCA DE BANANA!';
+          badgeColor = '#facc15';
+        } else if (mapping.power === 'trip') {
+          targetCand = mapping.candidateBenefited === 'lula' ? 'flavio' : 'lula';
+          badgeText = '🥊 RASTEIRA!';
+          badgeColor = '#f87171';
+        } else if (mapping.power === 'impulse') {
+          badgeText = '🚀 IMPULSO!';
+          badgeColor = mapping.candidateBenefited === 'lula' ? '#fca5a5' : '#93c5fd';
+        }
+
         this.triggerPushVisual(mapping.candidateBenefited);
+        this.spawnFloatingCombatText(targetCand, badgeText, badgeColor);
         this.engine.handleEvent({
           type: 'gift',
           userId: `donor_${Date.now()}`,
@@ -1571,6 +1605,26 @@ export class AdminPanel {
       lane.classList.add('flash-push');
       setTimeout(() => lane.classList.remove('flash-push'), 450);
     }
+  }
+
+  private spawnFloatingCombatText(candidate: 'lula' | 'flavio', label: string, color: string): void {
+    const lane = document.getElementById(candidate === 'lula' ? 'lane-preview-lula' : 'lane-preview-flavio');
+    if (!lane) return;
+
+    const existing = lane.querySelectorAll('.arcade-float-badge');
+    if (existing.length >= 2) {
+      existing[0].remove();
+    }
+
+    const badge = document.createElement('div');
+    badge.className = 'arcade-float-badge font-pixel';
+    badge.style.color = color;
+    badge.textContent = label;
+    lane.appendChild(badge);
+
+    setTimeout(() => {
+      badge.remove();
+    }, 750);
   }
 
   private updateTabContent(): void {
@@ -1853,6 +1907,40 @@ export class AdminPanel {
       else if (flavio.activeEffects.some((e) => e.type === 'slip' || e.type === 'trip'))
         auraFlavio.className = 'runner-aura-slip';
       else auraFlavio.className = '';
+    }
+
+    // Celebração de Vitória e Jumbotron Arcade
+    const jumbotron = document.getElementById('preview-jumbotron-display');
+    const finishLine = this.container.querySelector('.checkered-finish-line');
+    const cardLula = this.container.querySelector('.candidate-compact-card.card-lula');
+    const cardFlavio = this.container.querySelector('.candidate-compact-card.card-flavio');
+
+    if ((state.status === 'finished' || state.status === 'intermission') && state.winnerId) {
+      const winnerIsLula = state.winnerId === 'lula';
+      const winnerProfile = winnerIsLula
+        ? liveServiceMock.getCandidateProfiles().lula
+        : liveServiceMock.getCandidateProfiles().flavio;
+
+      if (jumbotron) {
+        jumbotron.textContent = `★ VENCEDOR: ${winnerProfile.number} ${winnerProfile.name.toUpperCase()}! ★`;
+        jumbotron.className = `preview-jumbotron font-pixel ${winnerIsLula ? 'winner-lula' : 'winner-flavio'}`;
+      }
+      if (finishLine) finishLine.classList.add('finish-line-victory');
+      if (winnerIsLula) {
+        cardLula?.classList.add('card-winner');
+        cardFlavio?.classList.remove('card-winner');
+      } else {
+        cardFlavio?.classList.add('card-winner');
+        cardLula?.classList.remove('card-winner');
+      }
+    } else {
+      if (jumbotron) {
+        jumbotron.textContent = 'GRANDE PRÊMIO BRASÍLIA';
+        jumbotron.className = 'preview-jumbotron font-pixel';
+      }
+      if (finishLine) finishLine.classList.remove('finish-line-victory');
+      cardLula?.classList.remove('card-winner');
+      cardFlavio?.classList.remove('card-winner');
     }
 
     // Tempo conectado
