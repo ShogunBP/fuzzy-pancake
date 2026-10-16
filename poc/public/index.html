@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>PoC Android 24/7 — Corrida Interativa</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app-container">
+    <!-- Barra Superior de Telemetria -->
+    <header id="telemetry-bar">
+      <div class="telemetry-item">
+        <span class="telemetry-label">Uptime</span>
+        <span id="uptime-display" class="telemetry-value">00:00:00</span>
+      </div>
+      <div class="telemetry-item">
+        <span class="telemetry-label">FPS</span>
+        <span id="fps-display" class="telemetry-value good">60</span>
+      </div>
+      <div class="telemetry-item">
+        <span class="telemetry-label">RAM Node</span>
+        <span id="ram-display" class="telemetry-value">-- MB</span>
+      </div>
+      <div class="telemetry-item">
+        <span class="telemetry-label">Voltas</span>
+        <span id="laps-display" class="telemetry-value">0</span>
+      </div>
+    </header>
+
+    <!-- Canvas da Simulação 2D -->
+    <main id="canvas-wrapper">
+      <canvas id="race-canvas"></canvas>
+    </main>
+
+    <!-- Barra Inferior de Status e Controles -->
+    <footer id="footer-bar">
+      <div class="target-badge">Poco X5 Pro • Android 14 • Canvas 2D</div>
+      <button id="fullscreen-btn" class="fullscreen-btn">Tela Cheia</button>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

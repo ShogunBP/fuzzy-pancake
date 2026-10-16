@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Corrida Presidencial - Núcleo & Debug</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: #0d1117;
+        color: #f0f3f8;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        padding: 1.5rem 1rem;
+      }
+      #main-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 980px;
+      }
+      @media (min-width: 768px) {
+        #main-layout {
+          grid-template-columns: 460px 1fr;
+        }
+      }
+      .card-box {
+        background: #161b22;
+        border-radius: 12px;
+        padding: 1.4rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        border: 1px solid #30363d;
+      }
+      h1 {
+        font-size: 1.35rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        color: #60a5fa;
+      }
+      .score-board {
+        display: flex;
+        justify-content: space-around;
+        background: #21262d;
+        border-radius: 8px;
+        padding: 0.8rem;
+        margin-bottom: 1.2rem;
+        font-weight: bold;
+        border: 1px solid #30363d;
+      }
+      .track-container {
+        margin: 1.2rem 0;
+        background: #090d13;
+        border-radius: 8px;
+        padding: 1rem;
+        border: 1px solid #30363d;
+      }
+      .lane {
+        margin-bottom: 1.2rem;
+        position: relative;
+      }
+      .lane:last-child {
+        margin-bottom: 0;
+      }
+      .lane-label {
+        font-size: 0.88rem;
+        font-weight: 600;
+        margin-bottom: 0.4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .lane-effects {
+        font-size: 0.75rem;
+        color: #93c5fd;
+        font-weight: normal;
+        margin-left: 0.4rem;
+      }
+      .progress-bar-bg {
+        width: 100%;
+        height: 28px;
+        background: #21262d;
+        border-radius: 6px;
+        overflow: hidden;
+        position: relative;
+      }
+      .progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        transition: width 0.05s linear;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 8px;
+        font-size: 0.75rem;
+        font-weight: bold;
+      }
+      .fill-lula {
+        background: linear-gradient(90deg, #dc2626, #ef4444);
+        color: #fff;
+      }
+      .fill-flavio {
+        background: linear-gradient(90deg, #2563eb, #3b82f6);
+        color: #fff;
+      }
+      .push-indicator {
+        position: absolute;
+        right: 4px;
+        top: -6px;
+        background: #f59e0b;
+        color: #000;
+        font-size: 0.7rem;
+        font-weight: 800;
+        padding: 2px 6px;
+        border-radius: 10px;
+        opacity: 0;
+        transform: translateY(0);
+        transition: opacity 0.2s, transform 0.2s;
+        pointer-events: none;
+      }
+      .push-indicator.show {
+        opacity: 1;
+        transform: translateY(-8px);
+      }
+      .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.6rem;
+        border-radius: 4px;
+        font-size: 0.78rem;
+        background: #374151;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem;
+        margin-top: 1rem;
+      }
+      button {
+        background: #238636;
+        color: white;
+        border: none;
+        padding: 0.6rem 0.8rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.82rem;
+        transition: filter 0.15s;
+      }
+      button:hover {
+        filter: brightness(1.15);
+      }
+      button.btn-blue {
+        background: #1f6feb;
+      }
+      button.btn-red {
+        background: #da3633;
+      }
+      button.btn-amber {
+        background: #d29922;
+        color: #0d1117;
+      }
+      button.btn-secondary {
+        background: #21262d;
+        color: #c9d1d9;
+        border: 1px solid #30363d;
+      }
+      .btn-sm {
+        padding: 0.35rem 0.6rem;
+        font-size: 0.75rem;
+      }
+      .sim-mode-row {
+        margin-top: 0.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        background: #21262d;
+        padding: 0.5rem 0.8rem;
+        border-radius: 6px;
+        border: 1px solid #30363d;
+      }
+      .sim-mode-row select {
+        background: #0d1117;
+        color: #f0f3f8;
+        border: 1px solid #30363d;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+      }
+
+      /* Event Log UI Styles */
+      #event-log-container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-height: 480px;
+        background: #161b22;
+        border-radius: 12px;
+        border: 1px solid #30363d;
+        overflow: hidden;
+      }
+      .log-header {
+        padding: 1rem;
+        border-bottom: 1px solid #30363d;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #21262d;
+      }
+      .log-title {
+        font-size: 0.95rem;
+        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .log-counters {
+        font-size: 0.75rem;
+        color: #8b949e;
+        font-weight: normal;
+      }
+      .log-actions {
+        display: flex;
+        gap: 0.4rem;
+      }
+      .log-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        padding: 0.6rem 1rem;
+        background: #1c2128;
+        border-bottom: 1px solid #30363d;
+      }
+      .filter-btn {
+        background: #21262d;
+        color: #8b949e;
+        border: 1px solid #30363d;
+        padding: 0.25rem 0.6rem;
+        border-radius: 20px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .filter-btn.active {
+        background: #1f6feb;
+        color: #ffffff;
+        border-color: #388bfd;
+      }
+      .log-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0.8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        max-height: 520px;
+      }
+      .log-empty {
+        text-align: center;
+        color: #8b949e;
+        font-size: 0.85rem;
+        padding: 3rem 1rem;
+      }
+      .log-item {
+        background: #0d1117;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        padding: 0.55rem 0.75rem;
+        font-size: 0.8rem;
+        display: grid;
+        grid-template-columns: auto auto 1fr;
+        gap: 0.6rem;
+        align-items: baseline;
+      }
+      .log-item.log-applied {
+        border-left: 3px solid #2ea043;
+      }
+      .log-item.log-ignored {
+        border-left: 3px solid #f85149;
+        opacity: 0.85;
+      }
+      .log-item.log-lifecycle {
+        border-left: 3px solid #a371f7;
+        background: #161b22;
+      }
+      .log-time {
+        font-family: monospace;
+        font-size: 0.75rem;
+        color: #8b949e;
+      }
+      .log-badge {
+        font-size: 0.68rem;
+        font-weight: 800;
+        padding: 0.15rem 0.4rem;
+        border-radius: 4px;
+        text-transform: uppercase;
+      }
+      .badge-applied {
+        background: #238636;
+        color: #ffffff;
+      }
+      .badge-ignored {
+        background: #da3633;
+        color: #ffffff;
+      }
+      .badge-blocked {
+        background: #8957e5;
+        color: #ffffff;
+      }
+      .badge-system {
+        background: #388bfd;
+        color: #ffffff;
+      }
+      .log-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .log-event-title {
+        font-weight: 600;
+        color: #f0f6fc;
+      }
+      .log-event-title code {
+        background: #21262d;
+        padding: 0.1rem 0.3rem;
+        border-radius: 3px;
+        font-size: 0.75rem;
+      }
+      .log-reason {
+        color: #8b949e;
+        font-size: 0.75rem;
+      }
+      .log-code {
+        color: #f0883e;
+        font-family: monospace;
+      }
+      .log-effect {
+        color: #3fb950;
+        margin-left: 0.3rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main-layout">
+      <!-- Coluna da Corrida -->
+      <div id="race-column" class="card-box">
+        <h1>🏁 Corrida Presidencial</h1>
+
+        <div class="score-board">
+          <div>🔴 Lula: <span id="score-lula">0</span> vitórias</div>
+          <div>🔵 Flávio: <span id="score-flavio">0</span> vitórias</div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 0.8rem;">
+          <span id="race-status" class="status-badge">Aguardando início</span>
+          <span id="race-timer" style="margin-left: 0.8rem; font-family: monospace; font-size: 1.1rem; font-weight: bold;">00:00</span>
+        </div>
+
+        <div class="track-container">
+          <div class="lane">
+            <span id="indicator-lula" class="push-indicator">+2% ⚡ Empurrão!</span>
+            <div class="lane-label">
+              <div>
+                <span>🔴 Lula (13)</span>
+                <span id="effects-lula" class="lane-effects"></span>
+              </div>
+              <span id="lula-speed">0.00 m/s</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div id="bar-lula" class="progress-bar-fill fill-lula">0%</div>
+            </div>
+          </div>
+
+          <div class="lane">
+            <span id="indicator-flavio" class="push-indicator">+2% ⚡ Empurrão!</span>
+            <div class="lane-label">
+              <div>
+                <span>🔵 Flávio (22)</span>
+                <span id="effects-flavio" class="lane-effects"></span>
+              </div>
+              <span id="flavio-speed">0.00 m/s</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div id="bar-flavio" class="progress-bar-fill fill-flavio">0%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seletor de Modo de Simulação -->
+        <div class="sim-mode-row">
+          <span>Modo de Usuário:</span>
+          <select id="select-user-mode">
+            <option value="multi">👥 Múltiplos Usuários (Chat Coletivo)</option>
+            <option value="single">👤 Usuário Fixo (Testar Anti-Spam)</option>
+          </select>
+        </div>
+
+        <div class="controls">
+          <button id="btn-start">▶ Iniciar Corrida</button>
+          <button id="btn-pause" class="btn-secondary">⏸ Pausar / Retomar</button>
+          <button id="btn-chat-13" class="btn-red">💬 Chat "13" (Lula)</button>
+          <button id="btn-chat-22" class="btn-blue">💬 Chat "22" (Flávio)</button>
+          <button id="btn-spam-lula" class="btn-amber">🔥 Spam "13" (10 msg/s)</button>
+          <button id="btn-spam-flavio" class="btn-amber">🔥 Spam "22" (10 msg/s)</button>
+          <button id="btn-gift-rose" class="btn-red">🎁 Rosa (+25% Lula)</button>
+          <button id="btn-gift-white-rose" class="btn-blue">🎁 Rosa Branca (+25% Flávio)</button>
+          <button id="btn-gift-banana" class="btn-red">🍌 Banana (-40% Flávio)</button>
+          <button id="btn-gift-dino" class="btn-blue">🦖 Dinossauro (-40% Lula)</button>
+        </div>
+      </div>
+
+      <!-- Coluna do Event Log -->
+      <div id="log-column"></div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
